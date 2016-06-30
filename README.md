@@ -1,0 +1,2 @@
+# chranslate
+Angularjs translation chat
