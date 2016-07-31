@@ -8,7 +8,6 @@
      $( document ).ready(function() {
         var socket = io();
         $('form').submit(function(){
-          console.log("Button hit");
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
           return false;
