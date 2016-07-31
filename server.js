@@ -2,6 +2,8 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+console.log("We're in server");
+
 app.get('/', function(req, res){
   res.sendFile(__dirname+'/index.html');
 });
