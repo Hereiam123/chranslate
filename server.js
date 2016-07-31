@@ -7,10 +7,11 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+	console.log("We're connected");
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
 });
 
-http.listen(process.env.PORT || 5000 || 3000);
+http.listen(process.env.PORT || 5000);
 
