@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 console.log("We're in server");
 
 app.get('/', function(req, res){
+	console.log("App get working");
   res.sendFile(__dirname+'/index.html');
 });
 
