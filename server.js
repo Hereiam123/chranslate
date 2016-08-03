@@ -5,7 +5,8 @@ var io = require('socket.io')(http);
 
 console.log("We're in server");
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname+'/node_modules'));
 
 io.on('connection', function(socket){
   socket.on('send msg', function(data){
