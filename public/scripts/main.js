@@ -14,7 +14,7 @@
 var app=angular.module('chatApp', [])
 
 app.factory('socket', function(){
-  var socket=io.connect('http://localhost:5000');
+  var socket=io.connect();
   return socket;
 })
 
