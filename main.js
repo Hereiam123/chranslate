@@ -1,4 +1,6 @@
- /*$( document ).ready(function() {
+ /* old jquery code
+
+  $( document ).ready(function() {
         var socket = io();
         $('form').submit(function(){
           socket.emit('chat message', $('#m').val());
@@ -14,7 +16,7 @@
 var app=angular.module('chatApp', [])
 
 app.factory('socket', function(){
-  var socket=io.connect(process.env.PORT);
+  var socket=io.connect();
   return socket;
 })
 
