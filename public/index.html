@@ -1,38 +1,19 @@
 <!doctype html>
 <html ng-app="chatApp">
   <head>
-    <title>Socket.IO chat</title>
+    <title>Chranslate</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="angular/angular.min.js"></script>
     <script src="angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="angular-ui-router/release/angular-ui-router.js"></script>
     <script src="scripts/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   </head>
+
   <body>
-  <div class="container" ng-controller="ChatCtrl">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="col-md-3">
-          <h4>What Was Said</h4>
-          <ul>
-            <li ng-repeat="msg in msgs">{{msg}}</li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h4>What You'll Say</h4>
-          {{output.text}}
-        </div>
-      </div>
-      <div class="col-md-6">   
-        <form role="form" class="form-inline" ng-submit="sendMsg()">
-          <div class="form-group">
-            <input ng-model="msg" class="form-control"/>
-            <input type="submit" class="btn btn-info"/>
-          </div>
-        </form>
-      </div>
+    <div class="container" ng-controller="ChatCtrl">
+      <ui-view></ui-view>
     </div>
-  </div>
   </body>
 
 </html>
