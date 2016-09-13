@@ -38,8 +38,6 @@ io.on('connection',function(socket) {
 	socket.on('new user', function(data){
 		socket.username=data;
 		users.push(socket.username);
-		console.log(socket.username);
-		console.log(users);
 		updateUsernames();
 	});
 

@@ -61,6 +61,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state)
 
     socket.on('get users', function(data){
         $scope.usernames=data;
+        $scope.$digest();
     });
 });
 
