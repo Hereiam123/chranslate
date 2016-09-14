@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-2">
     <div class="userList">
       <h3>Online Users</h3>
       <ul class="list-group" id="users" ng-repeat="user in usernames">
@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 col-md-offset-2">
     <div ng-controller="DropdownCtrl">
       <h3>Translate to: </h3>
       <div class="btn-group" uib-dropdown is-open="status.isopen">
@@ -25,22 +25,24 @@
     </div>
     <form role="form" class="form-inline" ng-submit="sendMsg()">
       <div class="form-group">
-        <input type="text" ng-model="msg" class="form-control"></input>
+        <input type="text" ng-model="msg" placeholder="Enter a message!" class="form-control"></input>
         <input type="submit" class="btn btn-info" value="Send Message"/>
       </div>
     </form>
   </div>
   <div class="col-md-2">
-    <h4>What You'll Say</h4>
+    <h3>What You'll Say</h3>
     {{output}}
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-4">
-    <h4>What Was Said</h4>
-    <ul>
-      <li ng-repeat="msg in msgs">{{msg}}</li>
-    </ul>
+    <div class="messageOutput"></div>
+      <h4>What Was Said</h4>
+      <ul>
+        <li ng-repeat="msg in msgs">{{msg}}</li>
+      </ul>
+    </div>
   </div>
 </div>
