@@ -68,13 +68,15 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 {
   $scope.msgs=[];
 
+  var output='';
   $scope.$watch('msg',function(){
     //get response for data based input and output language
     $http({
       method:'GET',
       url:'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160723T144020Z.0c10deb189f9465d.aad68393900352c2aa9b1632bcacb766fbd107f8&text='+$scope.msg+'&lang=en-'+setLanguage.getLanguage()})
       .then(function(response){
-        $scope.output=response.data;
+        output=response.data;
+        $scope.output=output.text.toString();
         $log.info(response);
       },function(reason){
         $scope.error=reason.data;
@@ -86,8 +88,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
       if (!$scope.msg) {
           return;
       }
-
-      $scope.msg = $scope.output.text;
+      $scope.msg = $scope.output;
       socket.emit('send msg', $scope.msg);
       $scope.msg = '';
   }
