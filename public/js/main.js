@@ -66,7 +66,19 @@ app.controller('DropdownCtrl', function ($scope, $log, setLanguage) {
 
 app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 {
-  $scope.msgs=[];
+    $scope.userMenu = 'menuDisplayed';
+    $scope.activeToggle = function(){
+        if($scope.userMenu == '')
+        {
+            $scope.userMenu = 'menuDisplayed';
+        }
+        else
+        {
+            $scope.userMenu='';
+        }
+    }
+
+    $scope.msgs=[];
 
   var output='';
   $scope.$watch('msg',function(){
