@@ -121,11 +121,12 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
   socket.on('get msg', function(data)
   {
     $scope.msgs.push(data);
+    $scope.$apply();
   });
 
   socket.on('get users', function(data){
     $scope.usernames=data;
-      $scope.$apply();
+    $scope.$apply();
   });
 });
 
