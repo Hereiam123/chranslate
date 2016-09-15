@@ -5,6 +5,11 @@
     border:black, 1px;
 }
 
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
 #sidebar-wrapper{
     z-index:1;
     position: absolute;
@@ -13,6 +18,7 @@
     overflow-y:hidden;
     background-color: #2c3e50;
     opacity:0.9;
+    transition: all .4s ease 0s;
 }
 
 /**Container**/
@@ -20,15 +26,18 @@
     width:100%;
     position:absolute;
     padding: 15px;
+    transition: all .4s ease 0s;
 }
 
 /*change the width of the sidebar to display it*/
 .wrapper.menuDisplayed #sidebar-wrapper{
     width:250px;
+    transition: all .7s ease 0s;
 }
 
 .wrapper.menuDisplayed #page-content-wrapper{
     padding-left:250px;
+    transition: all .7s ease 0s;
 }
 
 /**Sidebar**/

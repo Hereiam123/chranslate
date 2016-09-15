@@ -17,7 +17,7 @@ app.use(express.static(__dirname+'/public'));
 app.use(express.static(__dirname+'/node_modules'));
 
 //socket connections
-io.on('connection',function(socket) {
+io.sockets.on('connection',function(socket) {
 	connections.push(socket);
 
 	console.log('Connected: %s sockets connected', connections.length);

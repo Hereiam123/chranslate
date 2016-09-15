@@ -80,6 +80,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 
     $scope.msgs=[];
 
+
   var output='';
   $scope.$watch('msg',function(){
     //get response for data based input and output language
