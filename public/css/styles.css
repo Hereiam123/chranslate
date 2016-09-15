@@ -1,6 +1,13 @@
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
+    background:url(https://www.takemefishing.org/tmf/assets/images/fish/american-shad-464x170.png);
+    animation: backgroundScroll 10s linear infinite;
+}
+
+@keyframes backgroundScroll {
+    from {background-position: 0 0;}
+    to {background-position: 0px -150px;}
 }
 
 #userList{
@@ -77,8 +84,10 @@
 }
 
 .messageOutput{
+    border-radius: 5px;
     margin-top: 3px;
     margin-bottom: 10px;
+    margin-left:3px;
     height:300px;
     overflow:scroll;
     border:black solid 1px;
@@ -123,5 +132,10 @@
 
 #languageControl{
     margin:3px;
+}
+
+#messageEnter{
+    padding-left:20px;
+    padding-right:20px;
 }
 
