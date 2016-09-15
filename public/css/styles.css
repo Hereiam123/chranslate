@@ -79,10 +79,6 @@
     margin:3px;
 }
 
-#translation{
-    padding:30px;
-}
-
 .messageOutput{
     border-radius: 5px;
     margin-top: 3px;
@@ -132,6 +128,14 @@
 
 #languageControl{
     margin:3px;
+}
+
+#translation{
+    border:black solid 1px;
+    margin:3px;
+    border-radius: 5px;
+    padding-bottom:20px;
+    padding-left:10px;
 }
 
 #messageEnter{

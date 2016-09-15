@@ -2,8 +2,8 @@ var express = require('express');
 var app=express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-users=[];
-connections=[];
+var users={};
+
 
 //added mongodb client, looking to put in mongoose module in future to save messages for users
 //var MongoClient = require('mongodb').MongoClient;
@@ -18,32 +18,34 @@ app.use(express.static(__dirname+'/node_modules'));
 
 //socket connections
 io.sockets.on('connection',function(socket) {
-	connections.push(socket);
-
-	console.log('Connected: %s sockets connected', connections.length);
-
-	socket.on('disconnect',function(data){
-		if(!socket.username)return;
-		users.splice(users.indexOf(socket.username),1);
-		updateUsernames();
-		connections.splice(connections.indexOf(socket),1);
-		console.log('Disconnected: %s sockets connected', connections.length);
-	});
-
 	socket.on('send msg', function (data) {
-		io.emit('get msg', data);
+		io.sockets.emit('get msg', {msg:data, user:socket.username});
 		console.log(data);
 	});
 
-	socket.on('new user', function(data){
-		socket.username=data;
-		users.push(socket.username);
-		updateUsernames();
+	socket.on('new user', function(data,callback){
+		if(data in users){
+			callback(false);
+		}
+		else {
+			callback(true);
+			socket.username=data;
+			users[socket.username]=socket;
+			updateUsernames();
+		}
 	});
 
 	function updateUsernames(){
-		io.sockets.emit('get users',users);
-	}
+		io.sockets.emit('get users',Object.keys(users));
+	};
+
+	socket.on('disconnect', function(data){
+		if(!socket.username)return;
+		else{
+			delete users[socket.username];
+			updateUsernames();
+		}
+	});
 });
 
 http.listen(process.env.PORT || 5000);

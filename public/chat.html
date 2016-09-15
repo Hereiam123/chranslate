@@ -49,7 +49,7 @@
                                     <img src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/5/profile/profile-80_9.jpg" />
                                 </div>
                                 <div class="messages">
-                                    <p>{{msg}}</p>
+                                    <p>{{msg.user}} : {{msg.msg}}</p>
                                 </div>
                             </li>
                         </ul>
@@ -59,7 +59,7 @@
                    <form role="form" class="form-horizontal" ng-submit="sendMsg()">
                        <div class="form-group">
                             <div class="input-group" id="messageEnter">
-                               <input type="text" ng-model="msg" placeholder="Enter a message!" class="form-control"/>
+                               <input type="text" ng-model="msg" class="form-control"/>
                                <span class="input-group-btn">
                                    <input type="submit" class="btn btn-info" value="Send Message"/>
                                </span>

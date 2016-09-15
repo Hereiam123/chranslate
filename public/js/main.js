@@ -20,7 +20,7 @@ app.factory('socket', function(){
 });
 
 app.factory('setLanguage', function () {
-    var language = "es";
+    var language = "en";
     return {
         getLanguage: function () {
             return language;
@@ -60,8 +60,6 @@ app.controller('DropdownCtrl', function ($scope, $log, setLanguage) {
         $event.stopPropagation();
         $scope.status.isopen = !$scope.status.isopen;
     };
-
-    $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
 });
 
 app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
@@ -76,12 +74,14 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
         {
             $scope.userMenu='';
         }
-    }
+    };
 
     $scope.msgs=[];
 
 
   var output='';
+  $scope.msg='Start by typing a message, Yay!';
+
   $scope.$watch('msg',function(){
     //get response for data based input and output language
     $http({
@@ -104,23 +104,28 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
       $scope.msg = $scope.output;
       socket.emit('send msg', $scope.msg);
       $scope.msg = '';
-  }
+  };
 
   $scope.sendUser=function(){
     var user=$scope.user;
-    socket.emit('new user',user);
-    $state.go('chat');
-  }
+    socket.emit('new user',user, function(data){
+        if(!data){
+            $scope.error="Username already taken";
+        }
+        else{
+            $state.go('chat');
+        }
+    });
+  };
 
-  socket.on('get msg', function(msg)
+  socket.on('get msg', function(data)
   {
-    $scope.msgs.push(msg);
-    $scope.$digest();
+    $scope.msgs.push(data);
   });
 
   socket.on('get users', function(data){
     $scope.usernames=data;
-    $scope.$digest();
+      $scope.$apply();
   });
 });
 
