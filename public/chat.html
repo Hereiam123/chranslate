@@ -1,6 +1,6 @@
 <div class="wrapper" ng-class="userMenu">
   <div id="sidebar-wrapper">
-    <div class="userList">
+    <div id="userList">
       <h3>Online Users</h3>
       <ul class="list-group" id="users" ng-repeat="user in usernames">
         <li>{{user}}</li>
@@ -11,14 +11,9 @@
   <div id="page-content-wrapper">
     <div class="container-fluid">
        <div class="row">
-           <div class="col-md-4">
+           <div class="col-md-3">
                <div class="row">
-                <a href="" class="btn btn-success" ng-click="activeToggle()">Online Users</a>
-               </div>
-
-               <div class="row">
-                <h3>What You'll Say</h3>
-                <p>{{output}}</p>
+                    <a href="" class="btn btn-success" id="sidebarToggle"  ng-click="activeToggle()">Online Users</a>
                </div>
 
                <div class="row">
@@ -36,21 +31,39 @@
                        </div>
                    </div>
                </div>
-           </div>
-           <div class="col-md-8">
+
                <div class="row">
-                <div class="messageOutput">
-                    <h4>What Was Said</h4>
-                    <ul class="list-unstyled">
-                        <li ng-repeat="msg in msgs">{{msg}}</li>
-                    </ul>
-                </div>
+                   <div id="translation">
+                        <h3>What You'll Say</h3>
+                        <p>{{output}}</p>
+                   </div>
+               </div>
+           </div>
+           <div class="col-md-9">
+               <div class="row">
+                    <div class="messageOutput">
+                        <h4 id="chatHeader">What Was Said</h4>
+                        <ul>
+                            <li ng-repeat="msg in msgs">
+                                <div class="avatar">
+                                    <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/5/profile/profile-80_9.jpg" />
+                                </div>
+                                <div class="messages">
+                                    <p>{{msg}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                </div>
                <div class="row">
-                   <form role="form" class="form-inline" ng-submit="sendMsg()">
+                   <form role="form" class="form-horizontal" ng-submit="sendMsg()">
                        <div class="form-group">
-                           <input type="text" ng-model="msg" placeholder="Enter a message!" class="form-control"/>
-                           <input type="submit" class="btn btn-info" value="Send Message"/>
+                            <div class="input-group">
+                               <input type="text" ng-model="msg" placeholder="Enter a message!" class="form-control"/>
+                               <span class="input-group-btn">
+                                   <input type="submit" class="btn btn-info" value="Send Message"/>
+                               </span>
+                            </div>
                        </div>
                    </form>
                </div>
