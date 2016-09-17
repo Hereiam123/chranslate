@@ -80,7 +80,6 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 
 
   var output='';
-  $scope.msg='Start by typing a message, Yay!';
 
   $scope.$watch('msg',function(){
     //get response for data based input and output language
@@ -94,8 +93,9 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
       },function(reason){
         $scope.error=reason.data;
         $log.info(reason);
-      });
     });
+  });
+
 
   $scope.sendMsg = function() {
       if (!$scope.msg) {
