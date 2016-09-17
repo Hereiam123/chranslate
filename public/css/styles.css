@@ -1,14 +1,22 @@
+@font-face {
+    font-family: KingThing;
+    src: url(../fonts/KingThings_Foundation.ttf);
+    weight:bold;
+}
+
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
-    background:url(https://www.takemefishing.org/tmf/assets/images/fish/american-shad-464x170.png);
-    animation: backgroundScroll 10s linear infinite;
+    font-family: KingThing, Helvetica, Arial, sans-serif;
+    /**background:url(https://www.takemefishing.org/tmf/assets/images/fish/american-shad-464x170.png);
+    animation: backgroundScroll 10s linear infinite;**/
 }
 
+/**
 @keyframes backgroundScroll {
     from {background-position: 0 0;}
     to {background-position: 0px -150px;}
-}
+}**/
 
 #userList{
     white-space: nowrap;
@@ -93,6 +101,23 @@
     padding:3px;
 }
 
+.messageOutput::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.messageOutput::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.messageOutput::-webkit-scrollbar-thumb
+{
+    background-color: #000000;
+}
+
 .messageOutput #chatHeader{
     padding-left: 10px;
     padding-bottom: 5px;
@@ -107,6 +132,7 @@
 .avatar {
     width: 40px;
 }
+
 .avatar img {
     border-radius: 5px;
     width: 100%;
