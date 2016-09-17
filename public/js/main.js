@@ -80,6 +80,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 
 
   var output='';
+  var sendTo;
 
   $scope.$watch('msg',function(){
     //get response for data based input and output language
@@ -96,13 +97,20 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
     });
   });
 
+    $scope.privateChat=function(user){
+        sendTo=user;
+        console.log(user);
+    }
 
   $scope.sendMsg = function() {
       if (!$scope.msg) {
           return;
       }
+      if(!sendTo){
+          return;
+      }
       $scope.msg = $scope.output;
-      socket.emit('send msg', $scope.msg);
+      socket.emit('send msg', {toUser:sendTo, msg:$scope.msg});
       $scope.msg = '';
   };
 

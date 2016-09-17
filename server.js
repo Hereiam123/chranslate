@@ -19,7 +19,7 @@ app.use(express.static(__dirname+'/node_modules'));
 //socket connections
 io.sockets.on('connection',function(socket) {
 	socket.on('send msg', function (data) {
-		io.sockets.emit('get msg', {msg:data, user:socket.username});
+		users[data.toUser].emit('get msg', {msg:data.msg, user:socket.username});
 		console.log(data);
 	});
 
