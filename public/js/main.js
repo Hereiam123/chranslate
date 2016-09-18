@@ -65,6 +65,11 @@ app.controller('DropdownCtrl', function ($scope, $log, setLanguage) {
 app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 {
     $scope.userMenu = '';
+    $scope.msgs=[];
+    $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
+    var output='';
+    var sendTo;
+
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
         {
@@ -75,12 +80,6 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
             $scope.userMenu='';
         }
     };
-
-    $scope.msgs=[];
-
-
-  var output='';
-  var sendTo;
 
   $scope.$watch('msg',function(){
     //get response for data based input and output language
@@ -99,6 +98,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 
     $scope.privateChat=function(user){
         sendTo=user;
+        $scope.connectedTo=user;
         console.log(user);
     }
 
