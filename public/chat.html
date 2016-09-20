@@ -38,12 +38,12 @@
                     <div class="messageOutput">
                         <ul>
                             <li ng-model="connectedTo">You are chatting with: {{connectedTo}}</li>
-                            <li ng-repeat="msg in msgs">
+                            <li ng-repeat="msg in msgs | orderBy:'date' track by $index">
                                 <div class="avatar">
                                     <img src="http://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" />
                                 </div>
                                 <div class="messages">
-                                    <p>{{msg.user}} : {{msg.msg}}</p>
+                                    <p>{{msg.user}} : {{msg.msg}} : {{msg.date}}</p>
                                 </div>
                             </li>
                         </ul>
@@ -58,7 +58,7 @@
                    <form role="form" class="form-horizontal" ng-submit="sendMsg()">
                        <div class="form-group">
                             <div class="input-group" id="messageEnter">
-                               <input type="text" ng-model="msg" placeholder="Pick a language and start typing, Yay!" class="form-control"/>
+                               <input type="text" ng-model="msg" ng-model-options="{debounce:1000}" placeholder="Pick a language and start typing, Yay!" class="form-control"/>
                                <span class="input-group-btn">
                                    <input type="submit" class="btn btn-info" value="Send Message"/>
                                </span>

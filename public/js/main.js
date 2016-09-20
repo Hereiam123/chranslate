@@ -1,4 +1,4 @@
-var app=angular.module('chatApp', ['ui.bootstrap','ui.router'])
+var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage'])
         .config(function($stateProvider,$urlRouterProvider) {
           $urlRouterProvider.otherwise("/login");
           $stateProvider
@@ -62,11 +62,11 @@ app.controller('DropdownCtrl', function ($scope, $log, setLanguage) {
     };
 });
 
-app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
+app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage,$localStorage,$sessionStorage)
 {
-    $scope.userMenu = '';
-    $scope.msgs=[];
+    $scope.userMenu='';
     $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
+    $scope.msgs=[];
     var output='';
     var sendTo;
 
@@ -96,11 +96,13 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
     });
   });
 
-    $scope.privateChat=function(user){
+  $scope.privateChat=function(user){
         sendTo=user;
         $scope.connectedTo=user;
-        console.log(user);
-    }
+        if($scope.msgs.length==0) {
+            socket.emit('get old msgs', sendTo);
+        }
+  };
 
   $scope.sendMsg = function() {
       if (!$scope.msg) {
@@ -115,7 +117,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
   };
 
   $scope.sendUser=function(){
-    var user=$scope.user;
+    user=$scope.user;
     socket.emit('new user',user, function(data){
         if(!data){
             $scope.error="Username already taken";
@@ -128,6 +130,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
 
   socket.on('get msg', function(data)
   {
+    data.date=new Date();
     $scope.msgs.push(data);
     $scope.$apply();
   });
@@ -136,6 +139,13 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage)
     $scope.usernames=data;
     $scope.$apply();
   });
+
+    socket.on('load old msgs', function(data){
+        for(i=0; i<=data.length-1; i++) {
+            $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
+        }
+        $scope.$apply();
+    });
 });
 
 

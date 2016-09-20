@@ -8,6 +8,7 @@
     <script src="angular/angular.min.js"></script>
     <script src="angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
     <script src="angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -30,8 +31,6 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" uib-collapse="!navbarCollapsed">
         <ul class="nav navbar-nav">
-          <li ng-show="isLoggedIn()"><a>{{currentUser()}}</a></li>
-          <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
           <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
         </ul>
       </div>
