@@ -141,6 +141,7 @@ app.controller('ChatCtrl', function($scope,socket,$http,$log,$state,setLanguage,
   });
 
     socket.on('load old msgs', function(data){
+        $scope.msgs=[];
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
