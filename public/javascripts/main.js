@@ -62,6 +62,8 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     auth.register=function(user){
         return $http.post('/register',user).success(function(data){
             auth.saveToken(data.token);
+            var name=auth.currentUser();
+            socket.emit('entered chat',name);
         });
     };
     auth.logIn=function(user){
@@ -80,11 +82,6 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     };
     return auth;
 }]);
-
-/*app.factory('socket', [function(){
-    var socket=io.connect();
-    return socket;
-}]);*/
 
 app.factory('socket', ['$rootScope',function ($rootScope) {
     var socket=io.connect();
