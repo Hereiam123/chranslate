@@ -67,13 +67,13 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     auth.logIn=function(user){
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
-            /*socket=io.connect();
-            socket.emit('entered chat',auth.currentUser());*/
+            socket=io.connect();
+            socket.emit('entered chat',auth.currentUser());
         });
     };
     auth.logOut=function(){
-        /*var name=auth.currentUser();
-        socket.emit('disconnect user',name);*/
+        var name=auth.currentUser();
+        socket.emit('disconnect user',name);
         $window.localStorage.removeItem('chranslate-token');
         $state.go('login');
     };
@@ -185,9 +185,9 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     var output='';
     var sendTo;
 
-    if(auth.isLoggedIn()){
+    /*if(auth.isLoggedIn()){
         socket.emit('entered chat',auth.currentUser());
-    };
+    };*/
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')

@@ -52,7 +52,6 @@ module.exports=function (io) {
         });
 
         socket.on('disconnect user',function(data){
-            console.log("Disconnected "+data);
             users[data].disconnect();
             delete users[socket.username];
             updateUsernames();
