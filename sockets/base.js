@@ -49,12 +49,14 @@ module.exports=function (io) {
         });
 
         socket.on('disconnect', function(data){
-            console.log("Disconnected "+data);
-            if(!socket.username){return;}
-            else{
-                delete users[socket.username];
-                updateUsernames();
-            }
+            setTimeout(function () {
+                console.log("Disconnected "+data);
+                if(!socket.username){return;}
+                else{
+                    delete users[socket.username];
+                    updateUsernames();
+                }
+            }, 10000);
         });
     });
 }
