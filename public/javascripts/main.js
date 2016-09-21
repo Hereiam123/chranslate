@@ -71,7 +71,7 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     };
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
-        $state.go('login');
+        socket.disconnect();
     };
     return auth;
 }]);
@@ -99,7 +99,7 @@ app.controller('NavCtrl',['$scope','auth',function($scope,auth){
     $scope.logOut=auth.logOut;
 }]);
 
-app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,auth){
+app.controller('AuthCtrl', ['$scope','$state','auth','socket', function($scope,$state,auth,socket){
     $scope.user={};
 
     $scope.register=function(){
@@ -113,8 +113,14 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
         auth.logIn($scope.user).error(function(error){
             $scope.error=error;
         }).then(function(){
+            if(!socket.connected){
+                socket.connect();
+            }
             $state.go('chat');
         });
+    };
+    $scope.logOut=function(socket){
+
     };
 }]);
 
@@ -210,6 +216,8 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         data.date=new Date();
         $scope.$apply($scope.msgs.push(data));
     });
+
+
 
     socket.on('get users', function(data){
         console.log(data);
