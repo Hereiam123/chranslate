@@ -1,6 +1,5 @@
 var app=angular.module('chatApp', ['ui.bootstrap','ui.router'])
     .config(function($stateProvider,$urlRouterProvider) {
-        $urlRouterProvider.otherwise("/register");
         $stateProvider
             .state('chat',{
                 url:'/chat',
@@ -27,6 +26,7 @@ var app=angular.module('chatApp', ['ui.bootstrap','ui.router'])
                     }
                 }]
             });
+        $urlRouterProvider.otherwise("/register");
     });
 
 app.factory('auth', ['$http','$window','$state',function($http,$window,$state){
@@ -63,7 +63,7 @@ app.factory('auth', ['$http','$window','$state',function($http,$window,$state){
             auth.saveToken(data.token);
         });
     };
-    auth.login=function(user){
+    auth.logIn=function(user){
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
         });
@@ -108,8 +108,8 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
             $state.go('chat');
         });
     };
-    $scope.login=function(){
-        auth.login($scope.user).error(function(error){
+    $scope.logIn=function(){
+        auth.logIn($scope.user).error(function(error){
             $scope.error=error;
         }).then(function(){
             $state.go('chat');
