@@ -67,19 +67,46 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     auth.logIn=function(user){
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
+            socket=io.connect();
+            socket.emit('entered chat',auth.currentUser());
         });
     };
     auth.logOut=function(){
+        var name=auth.currentUser();
+        socket.emit('disconnect user',name);
         $window.localStorage.removeItem('chranslate-token');
-        socket.disconnect();
         $state.go('login');
     };
     return auth;
 }]);
 
-app.factory('socket', [function(){
+/*app.factory('socket', [function(){
     var socket=io.connect();
     return socket;
+}]);*/
+
+app.factory('socket', ['$rootScope',function ($rootScope) {
+    var socket = io.connect();
+    return {
+        on: function (eventName, callback) {
+            socket.on(eventName, function () {
+                var args = arguments;
+                $rootScope.$apply(function () {
+                    callback.apply(socket, args);
+                });
+            });
+        },
+        emit: function (eventName, data, callback) {
+            socket.emit(eventName, data, function () {
+                var args = arguments;
+                $rootScope.$apply(function () {
+                    if (callback) {
+                        callback.apply(socket, args);
+                    }
+                });
+            })
+        }
+    };
 }]);
 
 app.factory('setLanguage', [function () {
@@ -100,7 +127,7 @@ app.controller('NavCtrl',['$scope','auth',function($scope,auth){
     $scope.logOut=auth.logOut;
 }]);
 
-app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,auth){
+app.controller('AuthCtrl', ['$scope','$state','auth',function($scope,$state,auth){
     $scope.user={};
 
     $scope.register=function(){
@@ -158,11 +185,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     var output='';
     var sendTo;
 
-    if(auth.isLoggedIn())
-    {
-        socket.emit('entered chat',auth.currentUser());
-    }
-
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
         {
@@ -214,7 +236,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     socket.on('get msg', function(data)
     {
         data.date=new Date();
-        $scope.$apply($scope.msgs.push(data));
+        $scope.msgs.push(data);
     });
 
     socket.on('get users', function(data){
@@ -224,13 +246,13 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         {
             data.splice(index,1);
         }
-        $scope.$apply($scope.usernames=data);
+        $scope.usernames=data;
     });
 
     socket.on('load old msgs', function(data){
         $scope.msgs=[];
         for(i=0; i<=data.length-1; i++) {
-            $scope.$apply($scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created}));
+            $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
     });
 }]);

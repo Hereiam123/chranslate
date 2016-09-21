@@ -12,6 +12,7 @@ module.exports=function (io) {
 
     var users={};
     io.sockets.on('connection',function(socket) {
+        console.log("Connect Socket");
         socket.on('send msg', function (data) {
             var newMsg=new Chat({username:socket.username,to_user:data.toUser,msg:data.msg});
             newMsg.save(function(err){
@@ -42,11 +43,19 @@ module.exports=function (io) {
         };
 
         socket.on('disconnect', function(data){
+            console.log("Disconnected "+data);
             if(!socket.username){return;}
             else{
                 delete users[socket.username];
                 updateUsernames();
             }
+        });
+
+        socket.on('disconnect user',function(data){
+            console.log("Disconnected "+data);
+            users[data].disconnect();
+            delete users[socket.username];
+            updateUsernames();
         });
     });
 }
