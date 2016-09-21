@@ -224,7 +224,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         {
             data.splice(index,1);
         }
-        $scope.$apply($scope.usernames=data);
+        $scope.$applyAsync($scope.usernames=data);
     });
 
     socket.on('load old msgs', function(data){
