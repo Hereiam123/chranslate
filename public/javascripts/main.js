@@ -12,9 +12,8 @@ app.config(['$stateProvider','$urlRouterProvider',
                 url:'/login',
                 templateUrl:'/login.html',
                 controller:'AuthCtrl',
-                onEnter: ['$state','auth','socket',function($state,auth,socket){
+                onEnter: ['$state','auth',function($state,auth){
                     if(auth.isLoggedIn()){
-                        socket.emit('entered chat',auth.currentUser());
                         $state.go('chat');
                     }
                 }]
@@ -25,7 +24,6 @@ app.config(['$stateProvider','$urlRouterProvider',
                 controller:'AuthCtrl',
                 onEnter: ['$state','auth',function($state,auth){
                     if(auth.isLoggedIn()){
-                        socket.emit('entered chat',auth.currentUser());
                         $state.go('chat');
                     }
                 }]
@@ -160,10 +158,10 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     var output='';
     var sendTo;
 
-    /*if(auth.isLoggedIn())
+    if(auth.isLoggedIn())
     {
         socket.emit('entered chat',auth.currentUser());
-    }*/
+    }
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
