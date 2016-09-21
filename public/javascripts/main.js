@@ -29,7 +29,7 @@ var app=angular.module('chatApp', ['ui.bootstrap','ui.router'])
             });
     });
 
-app.factory('auth', ['$http','$window',function($http,$window){
+app.factory('auth', ['$http','$window','$state',function($http,$window,$state){
     var auth={};
 
     auth.saveToken=function(token){
@@ -70,6 +70,7 @@ app.factory('auth', ['$http','$window',function($http,$window){
     };
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
+        $state.go('login');
     };
     return auth;
 }]);
