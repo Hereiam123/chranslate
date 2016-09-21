@@ -73,7 +73,7 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
         $state.go('login');
-        socket.io.close();
+        socket.disconnect();
     };
     return auth;
 }]);
