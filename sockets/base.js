@@ -1,3 +1,6 @@
+var mongoose=require('mongoose');
+var Chat=mongoose.model('Chat');
+
 module.exports=function (io) {
     var users={};
     io.sockets.on('connection',function(socket) {
