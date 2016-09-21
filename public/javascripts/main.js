@@ -99,7 +99,7 @@ app.controller('NavCtrl',['$scope','auth',function($scope,auth){
     $scope.logOut=auth.logOut;
 }]);
 
-app.controller('AuthCtrl', ['$scope','$state','auth','socket', function($scope,$state,auth,socket){
+app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,auth){
     $scope.user={};
 
     $scope.register=function(){
@@ -113,9 +113,6 @@ app.controller('AuthCtrl', ['$scope','$state','auth','socket', function($scope,$
         auth.logIn($scope.user).error(function(error){
             $scope.error=error;
         }).then(function(){
-            if(!socket.connected){
-                socket.connect();
-            }
             $state.go('chat');
         });
     };
