@@ -259,6 +259,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         var message={user:auth.currentUser(), msg:$scope.output, date:date};
         $scope.msgs.push(message);
         socket.emit('send msg', {toUser:sendTo, msg:$scope.output});
+        console.log(JSON.stringify($scope.msgs));
         $scope.msg = '';
     };
 
@@ -283,6 +284,5 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
-        console.log(JSON.stringify($scope.msgs));
     });
 }]);
