@@ -35,6 +35,7 @@ module.exports=function (io) {
             console.log(data);
             socket.username=data;
             users[socket.username]=socket;
+            updateUsernames();
         });
 
         function updateUsernames(){
@@ -43,11 +44,8 @@ module.exports=function (io) {
 
         socket.on('remove user', function(data){
             console.log("Disconnected "+data);
-            if(!socket.username){return;}
-            else{
-                delete users[socket.username];
+                delete users[data];
                 updateUsernames();
-            }
         });
 
         socket.on('disconnect', function(data){
