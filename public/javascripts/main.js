@@ -108,8 +108,8 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
             $state.go('chat');
         });
     };
-    $scope.logIn=function(){
-        auth.logIn($scope.user).error(function(error){
+    $scope.login=function(){
+        auth.login($scope.user).error(function(error){
             $scope.error=error;
         }).then(function(){
             $state.go('chat');
