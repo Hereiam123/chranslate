@@ -12,9 +12,10 @@ app.config(['$stateProvider','$urlRouterProvider',
                 url:'/login',
                 templateUrl:'/login.html',
                 controller:'AuthCtrl',
-                onEnter: ['$state','auth',function($state,auth){
+                onEnter: ['$state','auth','socket',function($state,auth,socket){
                     if(auth.isLoggedIn()){
                         $state.go('chat');
+                        socket.emit('entered chat',auth.currentUser());
                     }
                 }]
             })
@@ -158,10 +159,10 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     var output='';
     var sendTo;
 
-    if(auth.isLoggedIn())
+    /*if(auth.isLoggedIn())
     {
         socket.emit('entered chat',auth.currentUser());
-    }
+    }*/
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
