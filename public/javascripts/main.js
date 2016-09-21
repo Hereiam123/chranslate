@@ -209,15 +209,27 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
 app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window','$localStorage', function($scope,socket,$http,$log,setLanguage,auth,$window,$localStorage)
 {
     $scope.userMenu='';
-    $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
+
     if($localStorage.messages){
         $scope.msgs=$localStorage.messages;
     }
     else {
         $scope.msgs = [];
     }
-    var output='';
+
     var sendTo;
+
+    if($localStorage.to_user){
+        $scope.connectedTo=$localStorage.to_user;
+        sendTo=$localStorage.to_user;
+        console.log(sendTo);
+    }
+    else
+    {
+        $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
+    }
+
+    var output='';
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
@@ -247,7 +259,8 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
 
     $scope.privateChat=function(user){
         sendTo=user;
-        $scope.connectedTo=user;
+        $localStorage.to_user=sendTo;
+        $scope.connectedTo=sendTo;
         if($scope.msgs.length==0) {
             socket.emit('get old msgs', sendTo);
         }
@@ -260,11 +273,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         if(!sendTo){
             return;
         }
+        console.log(sendTo);
         date=new Date();
         var message={user:auth.currentUser(), msg:$scope.output, date:date};
         $scope.msgs.push(message);
         $localStorage.messages=$scope.msgs;
-        console.log($localStorage.message);
         socket.emit('send msg', {toUser:sendTo, msg:$scope.output});
         $scope.msg = '';
     };
@@ -276,12 +289,12 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     socket.on('get users', function(data){
-        /*console.log(data);
+        console.log(data);
         var index=data.indexOf(auth.currentUser());
         if(index!=-1)
         {
             data.splice(index,1);
-        }*/
+        }
         $scope.usernames=data;
     });
 

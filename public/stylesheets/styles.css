@@ -49,6 +49,7 @@
 
 /**Container**/
 #page-content-wrapper{
+    white-space: nowrap;
     width:100%;
     position:absolute;
     padding: 15px;
@@ -168,6 +169,7 @@
 }
 
 #translation{
+    white-space: nowrap;
     padding-bottom:3px;
     padding-left:3px;
 }
