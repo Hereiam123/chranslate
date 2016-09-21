@@ -106,7 +106,6 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
         auth.register($scope.user).error(function(error){
            $scope.error=error;
         }).then(function(){
-            socket.emit('entered chat',auth.currentUser());
             $state.go('chat');
         });
     };
@@ -115,7 +114,6 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
             $scope.error=error;
         }).then(function(){
             $state.go('chat');
-            socket.emit('entered chat',auth.currentUser());
         });
     };
     $scope.logOut=function(){
@@ -161,6 +159,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     $scope.msgs=[];
     var output='';
     var sendTo;
+
+    if(auth.isLoggedIn())
+    {
+        socket.emit('entered chat',auth.currentUser());
+    }
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
