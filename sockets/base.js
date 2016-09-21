@@ -31,6 +31,7 @@ module.exports=function (io) {
         });
 
         socket.on('entered chat', function(data){
+            console.log(data);
             socket.username=data;
             users[socket.username]=socket;
             updateUsernames();
