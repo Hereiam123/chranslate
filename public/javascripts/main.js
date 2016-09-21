@@ -14,8 +14,8 @@ app.config(['$stateProvider','$urlRouterProvider',
                 controller:'AuthCtrl',
                 onEnter: ['$state','auth','socket',function($state,auth,socket){
                     if(auth.isLoggedIn()){
-                        $state.go('chat');
                         socket.emit('entered chat',auth.currentUser());
+                        $state.go('chat');
                     }
                 }]
             })
@@ -25,6 +25,7 @@ app.config(['$stateProvider','$urlRouterProvider',
                 controller:'AuthCtrl',
                 onEnter: ['$state','auth',function($state,auth){
                     if(auth.isLoggedIn()){
+                        socket.emit('entered chat',auth.currentUser());
                         $state.go('chat');
                     }
                 }]
