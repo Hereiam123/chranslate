@@ -258,7 +258,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         date=new Date();
         var message={user:auth.currentUser(), msg:$scope.output, date:date};
         $scope.msgs.push(message);
-        $window.localStorage['chat-messages']=$scope.msgs;
+        $window.localStorage['chat-messages']=JSON.stringify($scope.msgs);
         socket.emit('send msg', {toUser:sendTo, msg:$scope.output});
         $scope.msg = '';
     };
