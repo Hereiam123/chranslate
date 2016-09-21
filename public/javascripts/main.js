@@ -60,15 +60,17 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
         }
     };
     auth.register=function(user){
-        socket=io.connect();
-        socket.emit('entered chat',auth.currentUser());
+        if(!socket){
+            socket=io.connect();
+        }
         return $http.post('/register',user).success(function(data){
             auth.saveToken(data.token);
         });
     };
     auth.logIn=function(user){
-        socket=io.connect();
-        socket.emit('entered chat',auth.currentUser());
+        if(!socket){
+            socket=io.connect();
+        }
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
         });
@@ -82,7 +84,7 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
 }]);
 
 app.factory('socket', [function(){
-    var socket=io;
+    var socket=io.connect();
     return socket;
 }]);
 
@@ -161,6 +163,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     $scope.msgs=[];
     var output='';
     var sendTo;
+
+    if(auth.isLoggedIn())
+    {
+        socket.emit('entered chat',auth.currentUser());
+    };
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
