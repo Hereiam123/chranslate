@@ -76,14 +76,8 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     return auth;
 }]);
 
-app.factory('socket', ['auth',function(auth){
+app.factory('socket', [function(){
     var socket=io.connect();
-
-    if(auth.isLoggedIn())
-    {
-        socket.emit('entered chat',auth.currentUser());
-    }
-
     return socket;
 }]);
 
