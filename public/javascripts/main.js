@@ -65,6 +65,7 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
         });
     };
     auth.logIn=function(user){
+        socket.reconnect();
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
         });
