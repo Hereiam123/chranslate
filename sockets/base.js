@@ -1,5 +1,5 @@
 module.exports=function (io) {
-    var users=[];
+    var users={};
     io.sockets.on('connection',function(socket) {
         socket.on('send msg', function (data) {
             var newMsg=new Chat({username:socket.username,to_user:data.toUser,msg:data.msg});
