@@ -34,6 +34,16 @@ server.on('listening', onListening);
  */
 var io=require('socket.io').listen(server);
 require('../sockets/base')(io);
+var socket = io({
+  transports: [
+    'websocket',
+    'flashsocket',
+    'htmlfile',
+    'xhr-polling',
+    'jsonp-polling',
+    'polling'
+  ]
+});
 
 /**
  * Normalize a port into a number, string, or false.
