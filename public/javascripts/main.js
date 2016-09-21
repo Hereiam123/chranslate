@@ -1,4 +1,4 @@
-var app=angular.module('chatApp', ['ui.bootstrap','ui.router']);
+var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage']);
 
 app.config(['$stateProvider','$urlRouterProvider',
     function($stateProvider,$urlRouterProvider) {
@@ -206,12 +206,16 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
     };
 }]);*/
 
-app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window', function($scope,socket,$http,$log,setLanguage,auth,$window)
+app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window','$localStorage', function($scope,socket,$http,$log,setLanguage,auth,$window,$localStorage)
 {
     $scope.userMenu='';
     $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
-    $scope.msgs=[];
-    $window.localStorage['chat-messages']='';
+    if($localStorage.messages){
+        $scope.msgs=$localStorage.messages;
+    }
+    else {
+        $scope.msgs = [];
+    }
     var output='';
     var sendTo;
 
@@ -259,7 +263,8 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         date=new Date();
         var message={user:auth.currentUser(), msg:$scope.output, date:date};
         $scope.msgs.push(message);
-        $window.localStorage['chat-messages']=JSON.stringify($scope.msgs);
+        $localStorage.messages=$scope.msgs;
+        console.log($localStorage.message);
         socket.emit('send msg', {toUser:sendTo, msg:$scope.output});
         $scope.msg = '';
     };
@@ -271,23 +276,18 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     socket.on('get users', function(data){
-        console.log(data);
+        /*console.log(data);
         var index=data.indexOf(auth.currentUser());
         if(index!=-1)
         {
             data.splice(index,1);
-        }
+        }*/
         $scope.usernames=data;
     });
 
     socket.on('load old msgs', function(data){
-        var messages=$window.localStorage['chat-messages'];
-        var res=messages.split(',');
-        console.log(res);
-        //$scope.msgs=JSON.parse(messages);
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
-        $window.localStorage['chat-messages']=JSON.stringify($scope.msgs);
     });
 }]);
