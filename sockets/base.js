@@ -42,7 +42,7 @@ module.exports=function (io) {
             io.sockets.emit('get users',Object.keys(users));
         };
 
-        socket.on('disconnect', function(data){
+        socket.on('remove user', function(data){
             console.log("Disconnected "+data);
             if(!socket.username){return;}
             else{
@@ -51,10 +51,13 @@ module.exports=function (io) {
             }
         });
 
-        socket.on('disconnect user',function(data){
-            users[data].disconnect();
-            delete users[socket.username];
-            updateUsernames();
+        socket.on('disconnect', function(data){
+            console.log("Disconnected "+data);
+            if(!socket.username){return;}
+            else{
+                delete users[socket.username];
+                updateUsernames();
+            }
         });
     });
 }
