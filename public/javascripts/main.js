@@ -280,7 +280,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     socket.on('load old msgs', function(data){
-        console.log(JSON.parse($window.localStorage['chat-messages']));
+        console.log($window.localStorage['chat-messages']);
         $scope.msgs=JSON.parse($window.localStorage['chat-messages']);
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
