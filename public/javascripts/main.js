@@ -67,11 +67,13 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     auth.logIn=function(user){
         return $http.post('/login',user).success(function(data){
             var name=auth.currentUser();
+            console.log(name);
             socket.emit('entered chat',name);
             auth.saveToken(data.token);
         });
     };
     auth.logOut=function(){
+        console.log(name);
         var name=auth.currentUser();
         socket.emit('remove user',name);
         $window.localStorage.removeItem('chranslate-token');

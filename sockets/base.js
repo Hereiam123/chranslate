@@ -35,7 +35,6 @@ module.exports=function (io) {
             console.log(data);
             socket.username=data;
             users[socket.username]=socket;
-            updateUsernames();
         });
 
         function updateUsernames(){
