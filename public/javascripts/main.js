@@ -60,27 +60,27 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
         }
     };
     auth.register=function(user){
+        socket=io.connect();
         return $http.post('/register',user).success(function(data){
             auth.saveToken(data.token);
         });
-        socket.socket.reconnect();
     };
     auth.logIn=function(user){
+        socket=io.connect();
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
         });
-        socket.socket.socket.reconnect();
     };
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
-        socket.disconnect();
         $state.go('login');
+        socket.disconnect();
     };
     return auth;
 }]);
 
 app.factory('socket', [function(){
-    var socket=io.connect();
+    var socket;
     return socket;
 }]);
 
