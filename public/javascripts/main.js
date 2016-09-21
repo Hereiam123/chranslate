@@ -114,8 +114,8 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
         auth.logIn($scope.user).error(function(error){
             $scope.error=error;
         }).then(function(){
-            socket.emit('entered chat',auth.currentUser());
             $state.go('chat');
+            socket.emit('entered chat',auth.currentUser());
         });
     };
     $scope.logOut=function(){
