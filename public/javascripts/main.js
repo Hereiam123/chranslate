@@ -99,13 +99,14 @@ app.controller('NavCtrl',['$scope','auth',function($scope,auth){
     $scope.logOut=auth.logOut;
 }]);
 
-app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,auth){
+app.controller('AuthCtrl', ['$scope','$state','auth','socket', function($scope,$state,auth,socket){
     $scope.user={};
 
     $scope.register=function(){
         auth.register($scope.user).error(function(error){
            $scope.error=error;
         }).then(function(){
+            socket.emit('entered chat',$scope.user);
             $state.go('chat');
         });
     };
@@ -113,9 +114,13 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
         auth.logIn($scope.user).error(function(error){
             $scope.error=error;
         }).then(function(){
+            socket.emit('entered chat',$scope.user);
             $state.go('chat');
         });
     };
+    $scope.logOut=function(){
+        socket.disconnect();
+    }
 }]);
 
 app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, $log, setLanguage) {
@@ -210,8 +215,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         data.date=new Date();
         $scope.$apply($scope.msgs.push(data));
     });
-
-
 
     socket.on('get users', function(data){
         console.log(data);
