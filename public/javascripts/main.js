@@ -158,7 +158,10 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     var output='';
     var sendTo;
 
-    socket.emit('entered chat',auth.currentUser());
+    if(auth.isLoggedIn())
+    {
+        socket.emit('entered chat',auth.currentUser());
+    };
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
