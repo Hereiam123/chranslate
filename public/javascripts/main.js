@@ -1,4 +1,4 @@
-var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage'])
+var app=angular.module('chatApp', ['ui.bootstrap','ui.router'])
     .config(function($stateProvider,$urlRouterProvider) {
         $urlRouterProvider.otherwise("/register");
         $stateProvider
