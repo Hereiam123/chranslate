@@ -28,7 +28,7 @@ module.exports=function (io) {
                 if(err){throw err;}
                 console.log(data);
                 socket.emit('load old msgs',data);
-            });
+            }).limit(10);
         });
 
         socket.on('entered chat', function(data){

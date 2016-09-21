@@ -175,11 +175,42 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
     };
 }]);
 
+/*app.controller('DropdownCtrl2', ['$scope','$log','setLanguage',function ($scope, $log, setLanguage) {
+
+    $scope.options= [
+        {language:'Spanish',shorthand:'es'},
+        {language:'English',shorthand:'en'},
+        {language:'Dutch',shorthand:'nl'},
+        {language:'French',shorthand:'fr'}
+    ];
+
+    $scope.changeLanguageTo = function(option) {
+        $scope.selected = option.language;
+        console.log(option);
+        console.log(option.shorthand);
+        setLanguage.setLanguage(option.shorthand);
+    };
+
+    $scope.status = {
+        isopen: false
+    };
+
+    $scope.toggled = function(open) {
+        $log.log('Dropdown is now: ', open);
+    };
+
+    $scope.toggleDropdown = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
+    };
+}]);*/
+
 app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth', function($scope,socket,$http,$log,setLanguage,auth)
 {
     $scope.userMenu='';
     $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
-    $scope.msgs=[];
+    $scope.msgs=JSON.parse($window.localStorage['chranslate-msgs']);
     var output='';
     var sendTo;
 
@@ -252,5 +283,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
+        $window.localStorage['chranslate-msgs']=JSON.stringify($scope.msgs);
     });
 }]);
