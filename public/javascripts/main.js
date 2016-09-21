@@ -206,7 +206,7 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
     };
 }]);*/
 
-app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth', function($scope,socket,$http,$log,setLanguage,auth)
+app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window', function($scope,socket,$http,$log,setLanguage,auth,$window)
 {
     $scope.userMenu='';
     $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
