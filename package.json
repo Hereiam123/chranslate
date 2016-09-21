@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./bin/www"
   },
+
   "dependencies": {
     "angular": "~1.5.8",
     "angular-ui-bootstrap": "~2.1.3",
