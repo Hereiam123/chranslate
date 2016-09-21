@@ -71,7 +71,7 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     };
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
-        socket.disconnect();
+        $state.go('login');
     };
     return auth;
 }]);
@@ -115,9 +115,6 @@ app.controller('AuthCtrl', ['$scope','$state','auth', function($scope,$state,aut
         }).then(function(){
             $state.go('chat');
         });
-    };
-    $scope.logOut=function(socket){
-
     };
 }]);
 
