@@ -211,6 +211,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     $scope.userMenu='';
     $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
     $scope.msgs=[];
+    $window.localStorage['chat-messages']='';
     var output='';
     var sendTo;
 
@@ -280,11 +281,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     socket.on('load old msgs', function(data){
-        console.log(data);
-        console.log(JSON.stringify(data));
-        $scope.msgs=JSON.parse($window.localStorage['chat-messages']);
+        var messages=$window.localStorage['chat-messages'];
+        $scope.msgs=JSON.parse(messages);
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
+        $window.localStorage['chat-messages']=JSON.stringify($scope.msgs);
     });
 }]);
