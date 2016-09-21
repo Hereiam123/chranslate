@@ -1,5 +1,8 @@
 module.exports=function (io) {
     io.sockets.on('connection',function(socket) {
+        io.set("transports", ["xhr-polling"]);
+        io.set("polling duration", 10);
+
         socket.on('send msg', function (data) {
             var newMsg=new Chat({username:socket.username,to_user:data.toUser,msg:data.msg});
             newMsg.save(function(err){

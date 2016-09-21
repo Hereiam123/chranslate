@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport=require('passport');
 var mongoose=require('mongoose');
+
 //var nev=require('email-verification')(mongoose);
 //var nodemailer=require('nodemailer');
 
