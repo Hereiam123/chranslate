@@ -61,26 +61,19 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
     };
     auth.register=function(user){
         return $http.post('/register',user).success(function(data){
-            if(!socket){
-                socket=io.connect();
-                socket.emit('entered chat',auth.currentUser());
-            }
             auth.saveToken(data.token);
         });
     };
     auth.logIn=function(user){
+        socket=io.connect({'forceNew':true});
         return $http.post('/login',user).success(function(data){
-            if(!socket){
-                socket=io.connect();
-                socket.emit('entered chat',auth.currentUser());
-            }
             auth.saveToken(data.token);
         });
     };
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
         $state.go('login');
-        socket.disconnect();
+        socket.io.close();
     };
     return auth;
 }]);
