@@ -161,10 +161,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     {
         socket.emit('entered chat',auth.currentUser());
     }
-    else
-    {
-        socket.disconnect();
-    }
 
     $scope.activeToggle = function(){
         if($scope.userMenu == '')
