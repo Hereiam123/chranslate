@@ -206,23 +206,21 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         $scope.msg = '';
     };
 
-    socket.on('get msg', function(data)
+    $scope.$apply(socket.on('get msg', function(data)
     {
         data.date=new Date();
         $scope.msgs.push(data);
-        $scope.$apply();
-    });
+    }));
 
-    socket.on('get users', function(data){
+    $scope.$apply(socket.on('get users', function(data){
         $scope.usernames=data;
-        $scope.$apply();
-    });
 
-    socket.on('load old msgs', function(data){
+    }));
+
+    $scope.$apply(socket.on('load old msgs', function(data){
         $scope.msgs=[];
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
-        $scope.$apply();
-    });
+    }));
 }]);
