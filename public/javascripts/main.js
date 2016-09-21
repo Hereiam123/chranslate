@@ -1,5 +1,7 @@
-var app=angular.module('chatApp', ['ui.bootstrap','ui.router'])
-    .config(function($stateProvider,$urlRouterProvider) {
+var app=angular.module('chatApp', ['ui.bootstrap','ui.router']);
+
+app.config(['$stateProvider','$urlRouterProvider',
+    function($stateProvider,$urlRouterProvider) {
         $stateProvider
             .state('chat',{
                 url:'/chat',
@@ -27,7 +29,7 @@ var app=angular.module('chatApp', ['ui.bootstrap','ui.router'])
                 }]
             });
         $urlRouterProvider.otherwise("/register");
-    });
+    }]);
 
 app.factory('auth', ['$http','$window','$state',function($http,$window,$state){
     var auth={};
@@ -54,7 +56,6 @@ app.factory('auth', ['$http','$window','$state',function($http,$window,$state){
         if (auth.isLoggedIn()) {
             var token = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));
-
             return payload.username;
         }
     };

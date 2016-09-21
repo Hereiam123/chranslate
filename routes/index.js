@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mongoose=require('mongoose');
-var passport=require('passport');
 var User=mongoose.model('User');
+var passport=require('passport');
 var jwt = require('express-jwt');
 var auth = jwt({secret:'SECRET', userProperty:'payload'});
 
@@ -38,7 +38,7 @@ router.post('/login',function(req,res,next){
     else{
       return res.status(401).json(info);
     }
-  });
+  })(req,res,next);
 });
 
 module.exports = router;
