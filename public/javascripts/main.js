@@ -80,7 +80,7 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
 }]);
 
 app.factory('socket', [function(){
-    var socket;
+    var socket=io;
     return socket;
 }]);
 
