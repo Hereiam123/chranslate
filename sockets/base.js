@@ -1,7 +1,13 @@
-var mongoose=require('mongoose');
-var Chat=mongoose.model('Chat');
-
 module.exports=function (io) {
+    var mongoose=require('mongoose');
+
+    var chatSchema=mongoose.Schema({
+        username:String,
+        to_user:String,
+        msg:String,
+        created:{type:Date,default:Date.now}
+    });
+
     var users={};
     io.sockets.on('connection',function(socket) {
         socket.on('send msg', function (data) {
