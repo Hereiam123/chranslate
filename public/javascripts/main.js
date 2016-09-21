@@ -63,11 +63,13 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
         return $http.post('/register',user).success(function(data){
             auth.saveToken(data.token);
         });
+        socket.socket.reconnect();
     };
     auth.logIn=function(user){
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
         });
+        socket.socket.socket.reconnect();
     };
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
@@ -224,7 +226,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         {
             data.splice(index,1);
         }
-        $scope.$applyAsync($scope.usernames=data);
+        $scope.$apply($scope.usernames=data);
     });
 
     socket.on('load old msgs', function(data){
