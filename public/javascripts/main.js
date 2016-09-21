@@ -203,8 +203,10 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         if(!sendTo){
             return;
         }
-        $scope.msg = $scope.output;
-        socket.emit('send msg', {toUser:sendTo, msg:$scope.msg});
+        date=new Date();
+        var message={user:auth.currentUser(), msg:$scope.output, date:date};
+        $scope.msgs.push(message);
+        socket.emit('send msg', {toUser:sendTo, msg:$scope.output});
         $scope.msg = '';
     };
 
@@ -215,6 +217,12 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     socket.on('get users', function(data){
+        console.log(data);
+        var index=data.indexOf(auth.currentUser());
+        if(index!=-1)
+        {
+            data.splice(index,1);
+        }
         $scope.$apply($scope.usernames=data);
     });
 

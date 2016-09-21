@@ -8,6 +8,8 @@ module.exports=function (io) {
         created:{type:Date,default:Date.now}
     });
 
+    var Chat = mongoose.model('Chat', chatSchema);
+
     var users={};
     io.sockets.on('connection',function(socket) {
         socket.on('send msg', function (data) {
@@ -16,7 +18,6 @@ module.exports=function (io) {
                 if(err){console.log(err);}
                 users[data.toUser].emit('get msg', {msg:data.msg, user:socket.username});
             });
-            console.log(data);
         });
 
         socket.on('get old msgs',function(data){
@@ -24,6 +25,7 @@ module.exports=function (io) {
             console.log("To "+data);
             Chat.find({$or:[{username:socket.username, to_user:data},{username:data, to_user:socket.username}]},function(err,data){
                 if(err){throw err;}
+                console.log(data);
                 socket.emit('load old msgs',data);
             });
         });
@@ -35,15 +37,7 @@ module.exports=function (io) {
         });
 
         function updateUsernames(){
-            var keys=Object.keys(users);
-            console.log(socket.username);
-            var index=keys.indexOf(socket.username);
-            console.log(index);
-            if(index!=-1) {
-                keys.splice(index, 1);
-            }
-            console.log(keys);
-            io.sockets.emit('get users',keys);
+            io.sockets.emit('get users',Object.keys(users));
         };
 
         socket.on('disconnect', function(data){
