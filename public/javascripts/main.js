@@ -31,7 +31,7 @@ app.config(['$stateProvider','$urlRouterProvider',
         $urlRouterProvider.otherwise("/register");
     }]);
 
-app.factory('auth', ['$http','$window','$state',function($http,$window,$state){
+app.factory('auth', ['$http','$window','$state','socket',function($http,$window,$state,socket){
     var auth={};
 
     auth.saveToken=function(token){
@@ -71,6 +71,7 @@ app.factory('auth', ['$http','$window','$state',function($http,$window,$state){
     };
     auth.logOut=function(){
         $window.localStorage.removeItem('chranslate-token');
+        socket.disconnect();
         $state.go('login');
     };
     return auth;
