@@ -17,6 +17,8 @@ module.exports=function (io) {
             var newMsg=new Chat({username:socket.username,to_user:data.toUser,msg:data.msg});
             newMsg.save(function(err){
                 if(err){console.log(err);}
+                console.log(data.toUser);
+                console.log(users[data.toUser]);
                 users[data.toUser].emit('get msg', {msg:data.msg, user:socket.username});
             });
         });
@@ -49,14 +51,13 @@ module.exports=function (io) {
         });
 
         socket.on('disconnect', function(data){
-            setTimeout(function () {
                 console.log("Disconnected "+data);
-                if(!socket.username){return;}
+                /*if(!socket.username){return;}
                 else{
                     delete users[socket.username];
                     updateUsernames();
-                }
-            }, 10000);
-        });
+                }*/
+            }
+        );
     });
 }

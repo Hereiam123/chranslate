@@ -116,7 +116,7 @@
                 <div class="messageOutput">
                   <ul>
                     <li ng-model="connectedTo">You are chatting with: {{connectedTo}}</li>
-                    <li ng-repeat="msg in msgs | orderBy:'-date' track by $index">
+                    <li ng-repeat="msg in msgs | orderBy:'date' track by $index">
                       <div class="avatar">
                         <img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" />
                       </div>

@@ -84,7 +84,10 @@ app.factory('auth', ['$http','$window','$state','socket',function($http,$window,
 }]);
 
 app.factory('socket', ['$rootScope',function ($rootScope) {
-    var socket=io.connect();
+    var socket=io.connect({reconnection:true,
+    reconnectionDelay:1000,
+    reconnectionDelayMax:5000,
+    timeout:20000});
     return {
         on: function (eventName, callback) {
             socket.on(eventName, function () {
@@ -258,6 +261,9 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     $scope.privateChat=function(user){
+        if(sendTo!=user){
+            $scope.msgs=[];
+        }
         sendTo=user;
         $localStorage.to_user=sendTo;
         $scope.connectedTo=sendTo;
