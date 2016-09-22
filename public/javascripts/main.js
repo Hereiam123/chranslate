@@ -1,4 +1,4 @@
-var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage','ng-infinite-scroll']);
+var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage','infinite-scroll']);
 
 app.config(['$stateProvider','$urlRouterProvider',
     function($stateProvider,$urlRouterProvider) {
