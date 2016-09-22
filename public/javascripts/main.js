@@ -220,6 +220,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         $scope.msgs = [];
     }
 
+    if($localStorage.users)
+    {
+        $scope.usernames=$localStorage.users;
+    }
+
     var sendTo;
 
     if($localStorage.to_user){
@@ -302,6 +307,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
             data.splice(index,1);
         }
         $scope.usernames=data;
+        $localStorage.users=$scope.usernames;
     });
 
     socket.on('load old msgs', function(data){
