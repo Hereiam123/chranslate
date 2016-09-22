@@ -74,7 +74,6 @@ app.factory('auth', ['$http','$window','$state','socket','$localStorage',functio
         });
     };
     auth.logOut=function(){
-        console.log(name);
         var name=auth.currentUser();
         socket.emit('remove user',name);
         $window.localStorage.removeItem('chranslate-token');
@@ -173,8 +172,6 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
 
     $scope.changeLanguage = function(option) {
         $scope.selected = option.language;
-        console.log(option);
-        console.log(option.shorthand);
         setLanguage.setLanguage(option.shorthand);
     };
 
@@ -228,6 +225,8 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
 {
     $scope.userMenu='';
 
+    $scope.currentUser=auth.currentUser;
+
     if($localStorage.messages){
         $scope.msgs=$localStorage.messages;
     }
@@ -245,7 +244,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     if($localStorage.to_user){
         $scope.connectedTo=$localStorage.to_user;
         sendTo=$localStorage.to_user;
-        console.log(sendTo);
     }
     else
     {
@@ -293,7 +291,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     };
 
     $scope.loadMore=function(){
-        console.log("Load more");
         socket.emit('load more msgs', sendTo);
     };
 
@@ -304,7 +301,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         if(!sendTo){
             return;
         }
-        console.log(sendTo);
         date=new Date();
         var message={user:auth.currentUser(), msg:$scope.output, date:date};
         $scope.msgs.unshift(message);
@@ -334,5 +330,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         for(i=0; i<=data.length-1; i++) {
             $scope.msgs.push({user:data[i].username, msg:data[i].msg, date:data[i].created});
         }
+        $localStorage.messages=$scope.msgs;
     });
 }]);

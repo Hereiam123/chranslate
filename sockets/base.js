@@ -30,6 +30,7 @@ module.exports=function (io) {
                 .limit(5).sort({created:-1}).exec(function(err,data){
                 if(err){throw err;}
                 socket.emit('load old msgs',data);
+                console.log(data);
                 var date=data.slice(-1)[0];
                 if(date) {
                     lastSeen = date.created;
