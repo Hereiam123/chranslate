@@ -316,12 +316,12 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     socket.on('get users', function(data){
-        /*console.log(data);
+        console.log(data);
         var index=data.indexOf(auth.currentUser());
         if(index!=-1)
         {
             data.splice(index,1);
-        }*/
+        }
         $scope.usernames=data;
         $localStorage.users=$scope.usernames;
     });
