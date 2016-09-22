@@ -295,7 +295,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         console.log(sendTo);
         date=new Date();
         var message={user:auth.currentUser(), msg:$scope.output, date:date};
-        $scope.msgs.push(message);
+        $scope.msgs.unshift(message);
         $localStorage.messages=$scope.msgs;
         socket.emit('send msg', {toUser:sendTo, msg:$scope.output});
         $scope.msg = '';
@@ -304,16 +304,16 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     socket.on('get msg', function(data)
     {
         data.date=new Date();
-        $scope.msgs.push(data);
+        $scope.msgs.unshift(data);
     });
 
     socket.on('get users', function(data){
-        console.log(data);
+        /*console.log(data);
         var index=data.indexOf(auth.currentUser());
         if(index!=-1)
         {
             data.splice(index,1);
-        }
+        }*/
         $scope.usernames=data;
         $localStorage.users=$scope.usernames;
     });

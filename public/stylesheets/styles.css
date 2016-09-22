@@ -88,44 +88,44 @@
     margin:3px;
 }
 
-.messageOutput{
+#messageOutput{
     background:#e6f6ff;
     border-radius: 5px;
     margin-top: 3px;
     margin-bottom: 10px;
     margin-left:3px;
     height:300px;
-    overflow:scroll;
+    overflow-y:scroll;
     border:black solid 1px;
     width:100%;
     overflow-x: hidden;
     padding:3px;
 }
 
-.messageOutput::-webkit-scrollbar-track
+#messageOutput::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #F5F5F5;
 }
 
-.messageOutput::-webkit-scrollbar
+#messageOutput::-webkit-scrollbar
 {
     width: 6px;
     background-color: #F5F5F5;
 }
 
-.messageOutput::-webkit-scrollbar-thumb
+#messageOutput::-webkit-scrollbar-thumb
 {
     background-color: #000000;
 }
 
-.messageOutput #chatHeader{
+#messageOutput #chatHeader{
     padding-left: 10px;
     padding-bottom: 5px;
     border-bottom:black solid 1px;
 }
 
-.messageOutput li {
+#messageOutput li {
     display: flex;
     margin:3px;
 }

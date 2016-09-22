@@ -115,7 +115,7 @@
             <div class="col-md-9">
               <div class="row">
                 <h4 id="chatHeader">What Was Said</h4>
-                <div class="messageOutput" infinite-scroll="loadMore()" infinite-scroll-distance="3">
+                <div id="messageOutput" infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-immediate-check="false" infinite-scroll-container="'#messageOutput'">
                   <ul>
                     <li ng-model="connectedTo">You are chatting with: {{connectedTo}}</li>
                     <li ng-repeat="msg in msgs | orderBy:'msg.date' track by $index">
