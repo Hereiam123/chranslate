@@ -16,6 +16,12 @@ router.post('/register',function(req,res,next){
     return res.status(400).json({message:'Please fill out all fields'});
 }
 
+  User.count({username: req.body.username}, function (err, count){
+    if(count>0){
+      return res.status(400).json({message:'User name already taken'});
+    }
+  });
+
   var user=new User();
   user.username=req.body.username;
   user.setPassword(req.body.password);
