@@ -1,4 +1,4 @@
-var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage']);
+var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage','ng-infinite-scroll']);
 
 app.config(['$stateProvider','$urlRouterProvider',
     function($stateProvider,$urlRouterProvider) {
@@ -275,6 +275,10 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         if($scope.msgs.length==0) {
             socket.emit('get old msgs', sendTo);
         }
+    };
+
+    $scope.loadMore=function(){
+        socket.emit('get more msgs', sendTo);
     };
 
     $scope.sendMsg = function() {

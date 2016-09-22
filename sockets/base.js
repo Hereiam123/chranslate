@@ -10,6 +10,7 @@ module.exports=function (io) {
 
     var Chat = mongoose.model('Chat', chatSchema);
 
+    var lastSeen=null;
     var users={};
     io.sockets.on('connection',function(socket) {
         console.log("Connect Socket");
@@ -30,7 +31,19 @@ module.exports=function (io) {
                 if(err){throw err;}
                 console.log(data);
                 socket.emit('load old msgs',data);
-            }).limit(10);
+            }).limit(5).sort({created:-1}).exec(function(err,docs){
+                lastSeen=docs.slice(-1).date;
+            });
+        });
+
+        socket.on('load more msgs',function(data){
+            console.log("Get more msgs from:"+socket.username);
+            console.log("To "+data);
+            Chat.find({$or:[{username:socket.username, to_user:data},{username:data, to_user:socket.username}]},function(err,data){
+                if(err){throw err;}
+                console.log(data);
+                socket.emit('load old msgs',data);
+            }).limit(5);
         });
 
         socket.on('entered chat', function(data){
