@@ -1,4 +1,4 @@
-var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage','infinite-scroll']);
+var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage']);
 
 app.config(['$stateProvider','$urlRouterProvider',
     function($stateProvider,$urlRouterProvider) {
@@ -149,6 +149,18 @@ app.controller('AuthCtrl', ['$scope','$state','auth',function($scope,$state,auth
         });
     };
 }]);
+
+app.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+});
 
 app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, $log, setLanguage) {
 
