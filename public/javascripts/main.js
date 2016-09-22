@@ -281,6 +281,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     };
 
     $scope.loadMore=function(){
+        console.log("Load more");
         socket.emit('get more msgs', sendTo);
     };
 
