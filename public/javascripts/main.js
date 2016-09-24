@@ -330,12 +330,19 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         data.date=new Date();
         if(data.user==sendTo) {
             $scope.msgs.unshift(data);
-            console.log("On user");
         }
         else {
             console.log("Not on user");
         }
-
+        var searchName = data.user;
+        var index = -1;
+        for(i = 0; i<=$scope.usernames.length-1; i++) {
+            if ($scope.usernames[i].name === searchName) {
+                index = i;
+                break;
+            }
+        }
+        $scope.usernames[index].count++;
     });
 
     socket.on('get users', function(data){
@@ -347,7 +354,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         var usernames = data.map(function(e) {
             return { name: e , count:0 };
         });
-        console.log(usernames);
         $scope.usernames=usernames;
         $localStorage.users=$scope.usernames;
     });

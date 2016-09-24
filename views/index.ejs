@@ -82,7 +82,7 @@
         <div id="userList">
           <h3>Online Users</h3>
           <ul class="list-group" id="users" ng-repeat="user in usernames">
-            <li ng-click="privateChat(user.name)">{{user.name}}<i>{{user.count}}</i></li>
+            <li ng-click="privateChat(user.name)" notification-badge="user.count">{{user.name}}</li>
           </ul>
         </div>
       </div>
