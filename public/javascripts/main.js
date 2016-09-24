@@ -332,19 +332,23 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
             $scope.msgs.unshift(data);
             console.log("On user");
         }
-        else
-        {
+        else {
             console.log("Not on user");
         }
+
     });
 
     socket.on('get users', function(data){
-        var index=data.indexOf(auth.currentUser());
+        /*var index=data.indexOf(auth.currentUser());
         if(index!=-1)
         {
             data.splice(index,1);
-        }
-        $scope.usernames=data;
+        }*/
+        var usernames = data.map(function(e) {
+            return { name: e , count:0 };
+        });
+        console.log(usernames);
+        $scope.usernames=usernames;
         $localStorage.users=$scope.usernames;
     });
 
