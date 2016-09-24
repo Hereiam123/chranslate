@@ -161,6 +161,22 @@ app.directive('whenScrolled', function() {
     };
 });
 
+app.directive("notificationBadge",function($timeout){
+   return function($scope,elem,attrs) {
+       $timeout(function () {
+           elem.addClass('notification-badge');
+       }, 0);
+       $scope.$watch(attrs.notificationBadge, function (newVal) {
+           if (newVal > 0) {
+               elem.attr('data-badge-count', newVal);
+           }
+           else {
+               elem.removeAttr('data-badge-count');
+           }
+       });
+   }
+});
+
 app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, $log, setLanguage) {
 
     $scope.options= [
@@ -312,11 +328,17 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     socket.on('get msg', function(data)
     {
         data.date=new Date();
-        $scope.msgs.unshift(data);
+        if(data.user==sendTo) {
+            $scope.msgs.unshift(data);
+            console.log("On user");
+        }
+        else
+        {
+            console.log("Not on user");
+        }
     });
 
     socket.on('get users', function(data){
-        console.log(data);
         var index=data.indexOf(auth.currentUser());
         if(index!=-1)
         {

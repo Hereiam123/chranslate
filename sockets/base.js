@@ -14,13 +14,10 @@ module.exports=function (io) {
     var users={};
 
     io.sockets.on('connection',function(socket) {
-        console.log("Connect Socket");
         socket.on('send msg', function (data) {
             var newMsg=new Chat({username:socket.username,to_user:data.toUser,msg:data.msg});
             newMsg.save(function(err){
-                if(err){console.log(err);}
-                console.log(data.toUser);
-                console.log(users[data.toUser]);
+                if(err){throw err;}
                 users[data.toUser].emit('get msg', {msg:data.msg, user:socket.username});
             });
         });
@@ -30,7 +27,6 @@ module.exports=function (io) {
                 .limit(5).sort({created:-1}).exec(function(err,data){
                 if(err){throw err;}
                 socket.emit('load old msgs',data);
-                console.log(data);
                 var date=data.slice(-1)[0];
                 if(date) {
                     lastSeen = date.created;
@@ -39,9 +35,6 @@ module.exports=function (io) {
         });
 
         socket.on('load more msgs',function(data){
-            console.log("Get more msgs from:"+socket.username);
-            console.log("To "+data);
-            console.log(lastSeen);
             if(lastSeen) {
                 Chat.find({
                     $and: [{
@@ -65,7 +58,6 @@ module.exports=function (io) {
         });
 
         socket.on('entered chat', function(data){
-            console.log(data);
             socket.username=data;
             users[socket.username]=socket;
             updateUsernames();
@@ -76,13 +68,11 @@ module.exports=function (io) {
         };
 
         socket.on('remove user', function(data){
-            console.log("Disconnected "+data);
                 delete users[data];
                 updateUsernames();
         });
 
         socket.on('disconnect', function(data){
-                console.log("Disconnected "+data);
                 /*if(!socket.username){return;}
                 else{
                     delete users[socket.username];
