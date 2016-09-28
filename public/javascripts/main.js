@@ -346,11 +346,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     });
 
     socket.on('get users', function(data){
-        /*var index=data.indexOf(auth.currentUser());
+        var index=data.indexOf(auth.currentUser());
         if(index!=-1)
         {
             data.splice(index,1);
-        }*/
+        }
         var usernames = data.map(function(e) {
             return { name: e , count:0 };
         });
