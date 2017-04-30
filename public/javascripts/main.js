@@ -206,37 +206,6 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
     };
 }]);
 
-/*app.controller('DropdownCtrl2', ['$scope','$log','setLanguage',function ($scope, $log, setLanguage) {
-
-    $scope.options= [
-        {language:'Spanish',shorthand:'es'},
-        {language:'English',shorthand:'en'},
-        {language:'Dutch',shorthand:'nl'},
-        {language:'French',shorthand:'fr'}
-    ];
-
-    $scope.changeLanguageTo = function(option) {
-        $scope.selected = option.language;
-        console.log(option);
-        console.log(option.shorthand);
-        setLanguage.setLanguage(option.shorthand);
-    };
-
-    $scope.status = {
-        isopen: false
-    };
-
-    $scope.toggled = function(open) {
-        $log.log('Dropdown is now: ', open);
-    };
-
-    $scope.toggleDropdown = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.status.isopen = !$scope.status.isopen;
-    };
-}]);*/
-
 app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window','$localStorage', function($scope,socket,$http,$log,setLanguage,auth,$window,$localStorage)
 {
     $scope.userMenu='';
