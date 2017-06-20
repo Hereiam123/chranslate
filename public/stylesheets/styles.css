@@ -159,7 +159,8 @@
 
 .avatar img {
     border-radius: 30px;
-    width: 100%;
+    width: 40px;
+    height: 60px;
     display: block;
 }
 
