@@ -56,7 +56,7 @@ module.exports=function (io) {
 
         function updateUsernames(){
             io.sockets.emit('get users',Object.keys(users));
-        };
+        }
 
         socket.on('remove user', function(data){
                 delete users[data];
@@ -64,11 +64,8 @@ module.exports=function (io) {
         });
 
         socket.on('disconnect', function(data){
-                /*if(!socket.username){return;}
-                else{
                     delete users[socket.username];
                     updateUsernames();
-                }*/
             }
         );
     });
