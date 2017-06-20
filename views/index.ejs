@@ -118,11 +118,9 @@
                   <ul>
                     <li ng-model="connectedTo">You are chatting with: {{connectedTo}}</li>
                     <li ng-repeat="msg in msgs | orderBy:'msg.date' track by $index">
-                      <div ng-class="{true: 'messages', false:'messages_from'}[msg.user==currentUser()]">
-                        <p><span class="avatar"><img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" /></span>
-                          {{msg.user}} : {{msg.msg}} : {{msg.date}}
-                        </p>
-                      </div>
+                      <p><span class="avatar"><img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" /></span>
+                        {{msg.user}} : {{msg.msg}} : {{msg.date}}
+                      </p>
                     </li>
                   </ul>
                 </div>

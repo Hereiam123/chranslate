@@ -9,6 +9,7 @@ module.exports=function (io) {
             var newMsg=new Chat({username:socket.username,to_user:data.toUser,msg:data.msg});
             newMsg.save(function(err){
                 if(err){throw err;}
+                console.log(data.toUser);
                 users[data.toUser].emit('get msg', {msg:data.msg, user:socket.username});
             });
         });
