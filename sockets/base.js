@@ -2,6 +2,7 @@ module.exports=function (io) {
     var mongoose=require('mongoose');
     var lastSeen;
     var users={};
+    var Chat=mongoose.model('Chat');
 
     io.sockets.on('connection',function(socket) {
         socket.on('send msg', function (data) {
