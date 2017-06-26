@@ -2,7 +2,7 @@ var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage']);
 
 app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
     function($stateProvider,$urlRouterProvider,$locationProvider) {
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/");
         $locationProvider.hashPrefix('');
         $locationProvider.html5Mode(true);
         $stateProvider
@@ -32,9 +32,9 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
                 }]
             })
             .state('home', {
-                url:'/home',
+                url:'/',
                 templateUrl:'/home.html',
-                controller:'AuthCtrl'
+                controller:'HomeCtrl'
             });
     }]);
 
@@ -135,6 +135,10 @@ app.controller('NavCtrl',['$scope','auth',function($scope,auth){
     $scope.isLoggedIn=auth.isLoggedIn;
     $scope.currentUser=auth.currentUser;
     $scope.logOut=auth.logOut;
+}]);
+
+app.controller('HomeCtrl',['$scope','auth',function($scope,auth){
+    $scope.isLoggedIn=auth.isLoggedIn;
 }]);
 
 app.controller('AuthCtrl', ['$scope','$state','auth',function($scope,$state,auth){

@@ -44,12 +44,15 @@
 </nav>
 <div id="main">
   <ui-view></ui-view>
-  <script type="text/ng-template" id="/home.html">
+  <script type="text/ng-template" id="/home.html" ng-controller="HomeCtrl">
     <div class="jumbotron">
       <h1>Chranslate</h1>
       <p>A way to talk to your friends, without even knowing their language.</p>
       <a href="/#/register" class="btn btn-lg btn-success" ng-hide="isLoggedIn()">Register</a>
       <a href="/#/login" class="btn btn-lg btn-success" ng-hide="isLoggedIn()">Login</a>
+      <br>
+      <br>
+      <p ng-show="isLoggedIn()">You Are Logged In</p>
       <a href="/#/chat" class="btn btn-lg btn-success" ng-show="isLoggedIn()">Go To Chat</a>
     </div>
   </script>
