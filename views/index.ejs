@@ -134,7 +134,7 @@
     <div class="wrapper" ng-class="userMenu">
       <div id="sidebar-wrapper">
         <div id="userList">
-          <h3>Online Users</h3>
+          <h3>Online Users <i class="fa fa-window-close-o fa-lg" aria-hidden="true" ng-click="activeToggle()"></i></h3>
           <ul class="list-group" id="users" ng-repeat="user in usernames">
             <li><a href="" ng-click="privateChat(user.name)" notification-badge="user.count">{{user.name}}</a></li>
           </ul>
