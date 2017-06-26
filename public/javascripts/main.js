@@ -217,10 +217,16 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
     };
 }]);
 
-app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window','$localStorage', function($scope,socket,$http,$log,setLanguage,auth,$window,$localStorage)
+app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window',
+    '$localStorage','$state', function($scope,socket,$http,$log,setLanguage,auth,$window,$localStorage,$state)
 {
-    $scope.userMenu='';
+    if (!auth.isLoggedIn())
+    {
+        $state.go('register');
+    }
 
+    $scope.userMenu='';
+    $scope.output="Type to start translation!"
     $scope.currentUser=auth.currentUser;
 
     if($localStorage.messages){
@@ -249,7 +255,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     var output='';
 
     $scope.activeToggle = function(){
-        if($scope.userMenu == '')
+        if($scope.userMenu === '')
         {
             $scope.userMenu = 'menuDisplayed';
         }
@@ -259,29 +265,34 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         }
     };
 
-    $scope.$watch('msg',function(){
-        //get response for data based input and output language
-        $http({
-            method:'GET',
-            url:'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160723T144020Z.0c10deb189f9465d.aad68393900352c2aa9b1632bcacb766fbd107f8&text='+$scope.msg+'&lang=en-'+setLanguage.getLanguage()})
-            .then(function(response){
-                output=response.data;
-                $scope.output=output.text.toString();
-                $log.info(response);
-            },function(reason){
-                $scope.error=reason.data;
-                $log.info(reason);
-            });
-    });
+    $scope.checkMsg=function() {
+        $scope.$watch('msg', function() {
+            //get response for data based input and output language
+            $http({
+                method: 'GET',
+                url: 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160723T144020Z.0c10deb189f9465d.aad68393900352c2aa9b1632bcacb766fbd107f8&text=' + $scope.msg + '&lang=en-' + setLanguage.getLanguage()
+            })
+                .then(function (response) {
+                    if(response.data!=='undefined') {
+                        output = response.data;
+                        $scope.output = output.text.toString();
+                        $log.info(response);
+                    }
+                }, function (reason) {
+                    $scope.error = reason.data;
+                    $log.info(reason);
+                });
+        });
+    };
 
     $scope.privateChat=function(user){
-        if(sendTo!=user){
+        if(sendTo!==user){
             $scope.msgs=[];
         }
         sendTo=user;
         $localStorage.to_user=sendTo;
         $scope.connectedTo=sendTo;
-        if($scope.msgs.length==0) {
+        if($scope.msgs.length===0) {
             socket.emit('get old msgs', sendTo);
         }
     };
@@ -308,7 +319,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     socket.on('get msg', function(data)
     {
         data.date=new Date();
-        if(data.user==sendTo) {
+        if(data.user===sendTo) {
             $scope.msgs.unshift(data);
         }
         else {
@@ -327,14 +338,13 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
 
     socket.on('get users', function(data){
         var index=data.indexOf(auth.currentUser());
-        if(index!=-1)
+        if(index!==-1)
         {
             data.splice(index,1);
         }
-        var usernames = data.map(function(e) {
+        $scope.usernames = data.map(function(e) {
             return { name: e , count:0 };
         });
-        $scope.usernames=usernames;
         $localStorage.users=$scope.usernames;
     });
 
