@@ -249,7 +249,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     }
     else
     {
-        $scope.connectedTo='Nobody! Click a name in the user list to start a private Chranslation Chat!';
+        $scope.connectedTo='Nobody! Click a name in the user list.';
     }
 
     var output='';
