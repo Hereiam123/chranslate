@@ -11,6 +11,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* GET home page. */
+router.get('/home', function(req, res, next) {
+    res.render('index', { title: 'Express' });
+});
+
 router.post('/register',function(req,res,next){
   if(!req.body.username||!req.body.password){
     return res.status(400).json({message:'Please fill out all fields'});

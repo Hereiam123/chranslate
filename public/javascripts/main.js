@@ -33,9 +33,9 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
             })
             .state('home', {
                 url:'/home',
-                templateUrl:'/home.html'
-                }
-            );
+                templateUrl:'/home.html',
+                controller:'AuthCtrl'
+            });
     }]);
 
 app.factory('auth', ['$http','$window','$state','socket','$localStorage',function($http,$window,$state,socket,$localStorage){

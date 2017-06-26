@@ -36,7 +36,6 @@ require('./models/Users');
 require('./config/passport');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -53,7 +52,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(passport.initialize());
 app.use('/', routes);
-app.use('/users', users);
+app.use('/home', routes);
+app.use('/login', routes);
+app.use('/register', routes);
+app.use('/chat', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
