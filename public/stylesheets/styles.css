@@ -1,22 +1,47 @@
-@font-face {
-    font-family: KingThing;
-    src: url(../fonts/KingThings_Foundation.ttf);
-    weight:bold;
+body{
+    overflow:hidden;
 }
 
-.navbar {
+.navbar{
     margin-bottom: 0;
     border-radius: 0;
-    font-family: KingThing, Helvetica, Arial, sans-serif;
-    /**background:url(https://www.takemefishing.org/tmf/assets/images/fish/american-shad-464x170.png);
-    animation: backgroundScroll 10s linear infinite;**/
+    color:red;
 }
 
-/**
-@keyframes backgroundScroll {
-    from {background-position: 0 0;}
-    to {background-position: 0px -150px;}
-}**/
+.jumbotron{
+    min-height:100vh;
+    background: url('/img/friends-talking.jpg') no-repeat center center;
+    background-size: cover;
+    text-align:center;
+    margin-bottom:0;
+}
+
+.jumbotron h1{
+    position: relative;
+    padding-top: 20%;
+    margin: 0;
+    color:whitesmoke;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+    font-family: 'Roboto Slab', serif;
+}
+
+.jumbotron p{
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    color:whitesmoke;
+    font-family: 'Roboto Slab', serif;
+}
+
+.jumbotron a{
+    margin-top: 20px;
+}
+
+.panel-default{
+    opacity: 0.9;
+    margin-top:30px;
+}
+
+.form-group.last { margin-bottom:0px; }
 
 #userList{
     white-space: nowrap;

@@ -1,7 +1,10 @@
 var app=angular.module('chatApp', ['ui.bootstrap','ui.router','ngStorage']);
 
-app.config(['$stateProvider','$urlRouterProvider',
-    function($stateProvider,$urlRouterProvider) {
+app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
+    function($stateProvider,$urlRouterProvider,$locationProvider) {
+        $urlRouterProvider.otherwise("/home");
+        $locationProvider.hashPrefix('');
+        $locationProvider.html5Mode(true);
         $stateProvider
             .state('chat',{
                 url:'/chat',
@@ -27,8 +30,12 @@ app.config(['$stateProvider','$urlRouterProvider',
                         $state.go('chat');
                     }
                 }]
-            });
-        $urlRouterProvider.otherwise("/register");
+            })
+            .state('home', {
+                url:'/home',
+                templateUrl:'/home.html'
+                }
+            );
     }]);
 
 app.factory('auth', ['$http','$window','$state','socket','$localStorage',function($http,$window,$state,socket,$localStorage){
