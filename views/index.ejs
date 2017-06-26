@@ -136,7 +136,7 @@
         <div id="userList">
           <h3>Online Users <i class="fa fa-window-close-o fa-lg" aria-hidden="true" ng-click="activeToggle()"></i></h3>
           <ul class="list-group" id="users" ng-repeat="user in usernames">
-            <li><a href="" ng-click="privateChat(user.name)" notification-badge="user.count">{{user.name}}</a></li>
+            <li ng-click="activeToggle()"><a href="" ng-click="privateChat(user.name)" notification-badge="user.count">{{user.name}}</a></li>
           </ul>
         </div>
       </div>
@@ -145,10 +145,11 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12">
+              <div class="btn-group">
               <a href="" class="btn btn-success" id="sidebarToggle"  ng-click="activeToggle()">Online Users</a>
                 <div class="btn-group languageControl" ng-controller="DropdownCtrl" uib-dropdown is-open="status.isopen">
                   <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                    {{selected||'Select a language to translate to...' }}
+                    {{selected||'Translate to...' }}
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -157,6 +158,7 @@
                     </li>
                   </ul>
                 </div>
+              </div>
               </div>
             </div>
             <div class="row">

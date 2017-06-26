@@ -240,10 +240,6 @@ body{
     color: #ccc;
 }
 
-.languageControl{
-    margin:3px;
-}
-
 #translation{
     white-space: nowrap;
     padding-bottom:3px;
@@ -326,13 +322,6 @@ body{
 
     .footer-distributed .footer-left p.footer-links{
         line-height: 1.8;
-    }
-}
-
-/*Font resize*/
-@media (max-width: 600px) {
-    body{
-        overflow: scroll;
     }
 
     .jumbotron{
