@@ -13,6 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
   <script src="/javascripts/main.min.js"></script>
   <script src="https://use.fontawesome.com/492f97779d.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/styles.min.css">
   <base href="/">
@@ -142,75 +143,50 @@
       </div>
       <div id="page-content-wrapper">
         <div id="page-content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12">
-              <div class="btn-group">
+          <nav ng-model="connectedTo" id="chatNav">
+            <div class="btn-group">
               <a href="" class="btn btn-success" id="sidebarToggle"  ng-click="activeToggle()">Online Users</a>
-                <div class="btn-group languageControl" ng-controller="DropdownCtrl" uib-dropdown is-open="status.isopen">
-                  <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                    {{selected||'Translate to...' }}
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                    <li role="menuitem" ng-repeat="option in options">
-                      <a href="" ng-click="changeLanguage(option)">{{option.language}}</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <div class="btn-group languageControl" ng-controller="DropdownCtrl" uib-dropdown is-open="status.isopen">
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                  {{selected||'Translate to...' }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                  <li role="menuitem" ng-repeat="option in options">
+                    <a href="" ng-click="changeLanguage(option)">{{option.language}}</a>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12">
-                <h3 ng-model="connectedTo" id="chatHeader">You are chatting with: {{connectedTo}}</h3>
-                <div id="messageOutput" when-scrolled="loadMore()">
-                  <ul>
-                    <li ng-repeat="msg in msgs | orderBy:'msg.date' track by $index">
-                      <p><span class="avatar"><img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" /></span>
-                        {{msg.user}} : {{msg.msg}} : {{msg.date}}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <span ng-show="loading">Loading...</span>
-              </div>
+          </nav>
+          You are chatting with: {{connectedTo}}
+          <div id="messageOutput" when-scrolled="loadMore()">
+            <ul>
+              <li class="messages" ng-repeat="msg in msgs | orderBy:'msg.date' track by $index">
+                <p><span class="avatar"><img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" /></span>
+                  {{msg.user}} : {{msg.msg}}
+                </p>
+              </li>
+            </ul>
+            <span ng-show="loading">Loading...</span>
+          </div>
+          <div id="messageEnter">
+            <div id="translation">
+              <span>What You'll Say : {{output}}</span>
             </div>
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12">
-              <div id="translation">
-                <span>What You'll Say : {{output}}</span>
-              </div>
-              <form role="form" class="form-horizontal" ng-submit="sendMsg()" ng-keypress="checkMsg()">
-                <div class="form-group">
-                  <div class="input-group" id="messageEnter">
-                    <input type="text" ng-model="msg" ng-model-options="{debounce:1000}" placeholder="Pick a language and start typing, Yay!" class="form-control"/>
-                    <span class="input-group-btn">
-                       <input type="submit" class="btn btn-info" value="Send Message"/>
+            <form role="form" class="form-horizontal" ng-submit="sendMsg()" ng-keypress="checkMsg()">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" ng-model="msg" ng-model-options="{debounce:1000}" placeholder="Pick a language and start typing, Yay!" class="form-control"/>
+                  <span class="input-group-btn">
+                     <input type="submit" class="btn btn-info" value="Send Message"/>
                     </span>
-                  </div>
                 </div>
-              </form>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-        <footer class="footer-distributed">
-          <div class="footer-right">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="https://github.com/Hereiam123/chranslate"><i class="fa fa-github"></i></a>
-          </div>
-          <div class="footer-left">
-            <p class="footer-links">
-              <a href="/#/home">Home</a>
-            </p>
-            <p>Chranslate &copy; 2017</p>
-          </div>
-        </footer>
       </div>
-    </div>
   </script>
 </div>
 </body>

@@ -87,7 +87,7 @@ app.factory('auth', ['$http','$window','$state','socket','$localStorage',functio
         delete $localStorage.messages;
         delete $localStorage.users;
         delete $localStorage.to_user;
-        $state.go('login');
+        $state.go('home');
     };
     return auth;
 }]);
