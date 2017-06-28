@@ -70,14 +70,12 @@ app.factory('auth', ['$http','$window','$state','socket','$localStorage',functio
         return $http.post('/register',user).success(function(data){
             auth.saveToken(data.token);
             var name=auth.currentUser();
-            socket.emit('entered chat',name);
         });
     };
     auth.logIn=function(user){
         return $http.post('/login',user).success(function(data){
             auth.saveToken(data.token);
             var name=auth.currentUser();
-            socket.emit('entered chat',name);
         });
     };
     auth.logOut=function(){
@@ -92,7 +90,7 @@ app.factory('auth', ['$http','$window','$state','socket','$localStorage',functio
     return auth;
 }]);
 
-app.factory('socket', ['$rootScope',function ($rootScope) {
+app.factory('socket', ['$rootScope',function ($rootScope,auth) {
     var socket=io.connect({reconnection:true,
     reconnectionDelay:1000,
     reconnectionDelayMax:5000,
@@ -224,10 +222,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     {
         $state.go('register');
     }
-
+    
     $scope.userMenu='';
     $scope.output="Type to start translation!"
     $scope.currentUser=auth.currentUser;
+    socket.emit('entered chat',auth.currentUser());
 
     if($localStorage.messages){
         $scope.msgs=$localStorage.messages;

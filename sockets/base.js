@@ -63,11 +63,5 @@ module.exports=function (io) {
                 delete users[data];
                 updateUsernames();
         });
-
-        socket.on('disconnect', function(data){
-                    delete users[socket.username];
-                    updateUsernames();
-            }
-        );
     });
 }
