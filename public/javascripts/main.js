@@ -222,7 +222,11 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
     {
         $state.go('register');
     }
-    
+
+    $scope.logOut=function(){
+        auth.logOut();
+    }
+
     $scope.userMenu='';
     $scope.output="Type to start translation!"
     $scope.currentUser=auth.currentUser;
