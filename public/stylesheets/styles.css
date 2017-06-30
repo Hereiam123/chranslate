@@ -142,6 +142,7 @@ body{
     width:100%;
     overflow-y:hidden;
     overflow-x:hidden;
+    position:fixed;
 }
 
 #messageOutput:hover{
@@ -196,9 +197,11 @@ body{
     display: inline-block;
 }
 
-.messages {
+.messages:nth-of-type(odd) {
     position: relative;
     margin-bottom: 1%;
+    float:left;
+    width:50%;
     display:block;
     padding-left:3px;
     padding-top:2px;
@@ -213,7 +216,26 @@ body{
     box-shadow: 2px 2px 4px #888;
 }
 
-.messages:before{
+.messages:nth-of-type(even) {
+    position: relative;
+    margin-bottom: 1%;
+    float:right;
+    width:50%;
+    display:block;
+    padding-left:3px;
+    padding-top:2px;
+    padding-bottom:2px;
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 10px;
+    font-family: 'Lato', sans-serif;
+    -webkit-box-shadow: 2px 2px 4px #888;
+    -moz-box-shadow: 2px 2px 4px #888;
+    box-shadow: 2px 2px 4px #888;
+}
+
+.messages:nth-of-type(odd):before{
     content: "";
     position: absolute;
     top: 50%;
@@ -224,10 +246,26 @@ body{
     z-index: 1;
 }
 
+.messages:nth-of-type(even):after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    right:-25px;
+    border: solid 15px transparent;
+    border-left: 10px solid rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
 #translation{
-    white-space: nowrap;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.03);
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    border: none;
+    width: 75%;
+    padding: 1.2em;
+    outline: none;
     font-weight: 300;
 }
 
