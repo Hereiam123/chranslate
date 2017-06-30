@@ -135,10 +135,19 @@ body{
     transition: all .7s ease 0s;
 }
 
+#chatNav{
+    postion:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    font-size: 1.5em;
+    font-family: 'Lato', sans-serif;
+}
+
 #messageOutput{
     margin-top:0;
-    margin-bottom: 10px;
-    height:77vh;
+    margin-bottom: 20%;
+    height:80%;
     width:100%;
     overflow-y: scroll; /* has to be scroll, not auto */
     overflow-x: hidden;
@@ -160,15 +169,6 @@ body{
 #messageOutput::-webkit-scrollbar-thumb
 {
     background-color: #000000;
-}
-
-#chatNav{
-    postion:absolute;
-    top:0;
-    width:100%;
-    height:100%;
-    font-size: 1.5em;
-    font-family: 'Lato', sans-serif;
 }
 
 #messageOutput ul{
@@ -255,7 +255,7 @@ body{
 
 #translation{
     background: rgba(255, 255, 255, 0.03);
-    position: fixed;
+    position: absolute;
     bottom: 40px;
     left: 40px;
     border: none;
@@ -271,7 +271,7 @@ body{
 
 #messageEnter form input {
     background: rgba(255, 255, 255, 0.03);
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     border: none;
@@ -351,11 +351,16 @@ body{
         margin-top: 0;
     }
 
-    #messageOutput li {
-        list-style: none;
-        margin-left: 1px;
-        margin-right: 2px;
+    .messages:nth-of-type(even) {
+        width:60%;
+        margin:10px 0 0 0;
     }
+
+    .messages:nth-of-type(odd){
+        width:60%;
+        margin:10px 0 0 0;
+    }
+
 }
 
 

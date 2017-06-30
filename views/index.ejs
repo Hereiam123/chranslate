@@ -206,9 +206,9 @@
                 </ul>
               </div>
               <a href="" class="btn btn-success" ng-click="logOut()">Log Out</a>
+              {{connectedTo}}
             </div>
           </nav>
-          You are chatting with: {{connectedTo}}
           <div id="messageOutput" when-scrolled="loadMore()">
             <ul>
               <li class="messages" ng-repeat="msg in msgs | orderBy:'msg.date' track by $index">
@@ -220,7 +220,7 @@
           </div>
           <div id="messageEnter">
             <div id="translation">
-              <span>What You'll Say : {{output}}</span>
+              <span>Translation : {{output}}</span>
             </div>
             <form role="form" ng-submit="sendMsg()" ng-keypress="checkMsg()">
               <input type="text" ng-model="msg" ng-model-options="{debounce:1000}" placeholder="Pick a language and start typing!" />
