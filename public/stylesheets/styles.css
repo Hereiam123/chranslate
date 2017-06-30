@@ -140,13 +140,8 @@ body{
     margin-bottom: 10px;
     height:77vh;
     width:100%;
-    overflow-y:hidden;
-    overflow-x:hidden;
-    position:fixed;
-}
-
-#messageOutput:hover{
-    overflow-y:auto;
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
 }
 
 #messageOutput::-webkit-scrollbar-track
