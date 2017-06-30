@@ -49,33 +49,31 @@ body{
 }
 
 #userList h3{
-    margin-top:0;
-    padding-top:10px;
-    padding-bottom:10px;
-    padding-left:20px;
-    background-color: #0f0f0f;
-    width:100%;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.5em;
+    padding: 1em;
+    margin: 0;
+    font-weight: 300;
+    text-align: center;
     font-family: 'Roboto Slab', serif;
-    color:whitesmoke;
 }
 
 #userList li{
-    margin-top:0;
-    background-color: #1b6d85;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 100%;
+    margin: 1em 0.7em;
     transition:0.3s;
 }
 
 #userList a{
-    padding: 8px 8px 8px 32px;
+    padding-left: 1em;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 1.5em;
     color:whitesmoke;
     display: block;
     transition: 0.3s
-}
-
-#userList a:hover {
-    opacity: 1;
 }
 
 #userList li:hover{
@@ -149,7 +147,7 @@ body{
 #messageOutput{
     margin-top:0;
     margin-bottom: 10px;
-    height:77vh;
+    height:80vh;
     width:100%;
     overflow-y: scroll; /* has to be scroll, not auto */
     overflow-x: hidden;
@@ -255,9 +253,16 @@ body{
     z-index: 1;
 }
 
+#messageEnter{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 1em;
+    font-family: 'Lato', sans-serif;
+}
+
 #translation{
-    position: fixed;
-    bottom: 40px;
     border: none;
     width: 100%;
     padding: 1.2em;
@@ -272,13 +277,11 @@ body{
 
 #messageEnter form input {
     background: rgba(255, 255, 255, 0.03);
-    position: fixed;
-    bottom: 0;
+    color:whitesmoke;
     border: none;
     width: 100%;
     padding: 1.2em;
     outline: none;
-    color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
     text-align: center;
 }
