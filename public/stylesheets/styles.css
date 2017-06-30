@@ -336,9 +336,18 @@ body{
         width: 100%;
         height: 100vh;
         position: fixed;
-        padding: 15px;
         transition: all .4s ease 0s;
         background-color: whitesmoke;
+    }
+
+    #messageOutput{
+        margin-top:0;
+        margin-bottom: 10px;
+        height:70vh;
+        width:100%;
+        overflow-y: scroll; /* has to be scroll, not auto */
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
     }
 
     /*change the width of the sidebar to display it*/
