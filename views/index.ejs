@@ -205,7 +205,6 @@
                   </li>
                 </ul>
               </div>
-              <a href="/#/chat" class="btn btn-success">{{currentUser()}}</a>
               <a href="" class="btn btn-success" ng-click="logOut()">Log Out</a>
             </div>
           </nav>
@@ -213,9 +212,8 @@
           <div id="messageOutput" when-scrolled="loadMore()">
             <ul>
               <li class="messages" ng-repeat="msg in msgs | orderBy:'msg.date' track by $index">
-                <p><span class="avatar"><img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" /></span>
-                  {{msg.user}} : {{msg.msg}}
-                </p>
+                <span class="avatar"><img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" /></span>
+                {{msg.user}} : {{msg.msg}}
               </li>
             </ul>
             <span ng-show="loading">Loading...</span>
