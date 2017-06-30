@@ -124,6 +124,17 @@ body{
     background: linear-gradient(120deg, #17bebb, #f0a6ca);
 }
 
+
+#chatNav{
+    postion:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 1.5em;
+    font-family: 'Lato', sans-serif;
+}
+
 /*change the width of the sidebar to display it*/
 .wrapper.menuDisplayed #sidebar-wrapper{
     width:250px;
@@ -160,15 +171,6 @@ body{
 #messageOutput::-webkit-scrollbar-thumb
 {
     background-color: #000000;
-}
-
-#chatNav{
-    postion:absolute;
-    top:0;
-    width:100%;
-    height:100%;
-    font-size: 1.5em;
-    font-family: 'Lato', sans-serif;
 }
 
 #messageOutput ul{
@@ -254,15 +256,14 @@ body{
 }
 
 #translation{
-    background: rgba(255, 255, 255, 0.03);
     position: fixed;
     bottom: 40px;
-    left: 40px;
     border: none;
-    width: 75%;
+    width: 100%;
     padding: 1.2em;
     outline: none;
     font-weight: 300;
+    text-align: center;
 }
 
 #messageEnter form {
@@ -273,13 +274,13 @@ body{
     background: rgba(255, 255, 255, 0.03);
     position: fixed;
     bottom: 0;
-    left: 0;
     border: none;
-    width: 75%;
+    width: 100%;
     padding: 1.2em;
     outline: none;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
+    text-align: center;
 }
 
 ::-webkit-input-placeholder {
