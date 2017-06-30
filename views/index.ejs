@@ -174,15 +174,8 @@
             <div id="translation">
               <span>What You'll Say : {{output}}</span>
             </div>
-            <form role="form" class="form-horizontal" ng-submit="sendMsg()" ng-keypress="checkMsg()">
-              <div class="form-group">
-                <div class="input-group">
-                  <input type="text" ng-model="msg" ng-model-options="{debounce:1000}" placeholder="Pick a language and start typing, Yay!" class="form-control"/>
-                  <span class="input-group-btn">
-                     <input type="submit" class="btn btn-info" value="Send Message"/>
-                    </span>
-                </div>
-              </div>
+            <form role="form" ng-submit="sendMsg()" ng-keypress="checkMsg()">
+              <input type="text" ng-model="msg" ng-model-options="{debounce:1000}" placeholder="Pick a language and start typing, Yay!" />
             </form>
           </div>
         </div>
