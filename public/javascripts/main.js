@@ -270,21 +270,21 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
 
     $scope.checkMsg=function() {
         $scope.$watch('msg', function() {
-            //get response for data based input and output language
-            $http({
-                method: 'GET',
-                url: 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160723T144020Z.0c10deb189f9465d.aad68393900352c2aa9b1632bcacb766fbd107f8&text=' + $scope.msg + '&lang=en-' + setLanguage.getLanguage()
-            })
-                .then(function (response) {
-                    if(response.data!=='undefined') {
-                        output = response.data;
-                        $scope.output = output.text.toString();
-                        $log.info(response);
-                    }
-                }, function (reason) {
-                    $scope.error = reason.data;
-                    $log.info(reason);
-                });
+                //get response for data based input and output language
+                $http({
+                    method: 'GET',
+                    url: 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160723T144020Z.0c10deb189f9465d.aad68393900352c2aa9b1632bcacb766fbd107f8&text=' + $scope.msg + '&lang=en-' + setLanguage.getLanguage()
+                })
+                    .then(function (response) {
+                        if (response.data !== 'undefined') {
+                            output = response.data;
+                            $scope.output = output.text.toString();
+                            $log.info(response);
+                        }
+                    }, function (reason) {
+                        $scope.error = reason.data;
+                        $log.info(reason);
+                    });
         });
     };
 

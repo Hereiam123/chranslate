@@ -85,7 +85,7 @@
     <div class="jumbotron">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <span class="glyphicon glyphicon-lock"></span>Login
@@ -146,7 +146,7 @@
     <div class="jumbotron">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-lg-8 col-lg-offset-2">
+          <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <span class="glyphicon glyphicon-lock"></span>Register
@@ -206,8 +206,8 @@
                 </ul>
               </div>
               <a href="" class="btn btn-success" ng-click="logOut()">Log Out</a>
-              <span>Connected To: {{connectedTo}}</span>
             </div>
+            <span id="connectedTo">Connected To: {{connectedTo}}</span>
           </nav>
           <div id="messageOutput" when-scrolled="loadMore()">
             <ul>
@@ -216,7 +216,6 @@
                 {{msg.user}} : {{msg.msg}}
               </li>
             </ul>
-            <span ng-show="loading">Loading...</span>
           </div>
           <div id="messageEnter">
             <div id="translation">
