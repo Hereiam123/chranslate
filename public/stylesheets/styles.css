@@ -353,6 +353,7 @@ body {
 
     #messageOutput{
         margin-top: 0;
+        padding-left: 0;
     }
 
     .messages:nth-of-type(even) {
