@@ -190,15 +190,18 @@ body {
     margin-right:10%;
 }
 
-.avatar {
-    width: 40px;
-}
 
 .avatar img {
-    border-radius: 10px;
+    padding:3px;
+    border-radius: 50px;
     width: 40px;
     height: 60px;
     display: inline-block;
+}
+
+.messages{
+    text-align: center;
+    font-size: 1.5em;
 }
 
 .messages:nth-of-type(odd) {
@@ -208,7 +211,7 @@ body {
     width:50%;
     display:block;
     padding-left:3px;
-    padding-top:2px;
+    padding-top:3px;
     padding-bottom:2px;
     background: rgba(255, 255, 255, 0.2);
     -webkit-border-radius: 30px;
@@ -218,6 +221,10 @@ body {
     -webkit-box-shadow: 2px 2px 4px #888;
     -moz-box-shadow: 2px 2px 4px #888;
     box-shadow: 2px 2px 4px #888;
+}
+
+.messages:nth-of-type(odd) .avatar{
+    float:left;
 }
 
 .messages:nth-of-type(even) {
@@ -237,6 +244,10 @@ body {
     -webkit-box-shadow: 2px 2px 4px #888;
     -moz-box-shadow: 2px 2px 4px #888;
     box-shadow: 2px 2px 4px #888;
+}
+
+.messages:nth-of-type(even) .avatar{
+    float:right;
 }
 
 .messages:nth-of-type(odd):before{
@@ -365,7 +376,7 @@ body {
         width:60%;
         margin:3px 0 0 0;
     }
-
+    
 }
 
 
