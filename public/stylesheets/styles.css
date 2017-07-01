@@ -389,6 +389,18 @@ body {
         margin:3px 0 0 0;
     }
 
+    #translation{
+        padding: .5em;
+    }
+
+    #messageEnter form {
+        background: #222;
+    }
+
+    #messageEnter form input {
+        padding: .5em;
+    }
+
 }
 
 
