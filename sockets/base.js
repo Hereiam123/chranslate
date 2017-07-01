@@ -16,7 +16,7 @@ module.exports=function (io) {
 
         socket.on('get old msgs',function(data){
             Chat.find({$or:[{username:socket.username, to_user:data},{username:data, to_user:socket.username}]})
-                .limit(5).sort({created:-1}).exec(function(err,data){
+                .sort({created:-1}).exec(function(err,data){
                 if(err){throw err;}
                 socket.emit('load old msgs',data);
                 var date=data.slice(-1)[0];
