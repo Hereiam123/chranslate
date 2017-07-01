@@ -357,6 +357,10 @@ body {
         margin-right: 3%;
     }
 
+    .messages{
+        font-size: 1em;
+    }
+
     /*change the width of the sidebar to display it*/
     .wrapper.menuDisplayed #sidebar-wrapper {
         width: 100%;
@@ -376,7 +380,7 @@ body {
         width:60%;
         margin:3px 0 0 0;
     }
-    
+
 }
 
 
