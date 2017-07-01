@@ -391,6 +391,8 @@ body {
 
     #translation{
         padding: .5em;
+        background: #222;
+        color:whitesmoke;
     }
 
     #messageEnter form {
