@@ -45,7 +45,7 @@ body {
 
 .panel-default{
     opacity: 0.9;
-    margin-top:30%;
+    margin-top:30px;
 }
 
 .form-group.last { margin-bottom:0; }
@@ -130,17 +130,13 @@ body {
 
 
 #chatNav{
-    position:absolute;
+    postion:absolute;
     top:0;
     width:100%;
     height:100%;
     background: rgba(255, 255, 255, 0.2);
-    font-size: 1em;
+    font-size: 1.5em;
     font-family: 'Lato', sans-serif;
-}
-
-#connectedTo{
-    padding-left: 1em;
 }
 
 /*change the width of the sidebar to display it*/
@@ -155,7 +151,7 @@ body {
 }
 
 #messageOutput{
-    margin-top:40px;
+    margin-top:0;
     margin-bottom: 10px;
     height:80vh;
     width:100%;
