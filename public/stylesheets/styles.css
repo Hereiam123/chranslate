@@ -190,7 +190,6 @@ body {
     margin-right:10%;
 }
 
-
 .avatar img {
     padding:1px;
     border-radius: 10px;
@@ -201,7 +200,12 @@ body {
 
 .messages{
     text-align: center;
+}
+
+.message{
+    padding-top:3%;
     font-size: 1.5em;
+    font-family: 'Lato', sans-serif;
 }
 
 .messages:nth-of-type(odd) {

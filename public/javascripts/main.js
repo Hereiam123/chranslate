@@ -300,10 +300,6 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         }
     };
 
-    $scope.loadMore=function(){
-        socket.emit('load more msgs', sendTo);
-    };
-
     $scope.sendMsg = function() {
         if (!$scope.msg) {
             return;

@@ -14,6 +14,7 @@
   <script src="/javascripts/main.min.js"></script>
   <script src="https://use.fontawesome.com/492f97779d.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/styles.min.css">
   <base href="/">
@@ -191,7 +192,7 @@
       </div>
       <div id="page-content-wrapper">
         <div id="page-content">
-          <nav ng-model="connectedTo" id="chatNav">
+          <nav id="chatNav">
             <div class="btn-group">
               <a href="" class="btn btn-success" id="sidebarToggle"  ng-click="activeToggle()">Online Users</a>
               <div class="btn-group languageControl" ng-controller="DropdownCtrl" uib-dropdown is-open="status.isopen">
@@ -207,13 +208,13 @@
               </div>
               <a href="" class="btn btn-success" ng-click="logOut()">Log Out</a>
             </div>
-            Connected To: {{connectedTo}}
+            <p ng-model="connectedTo" id="connectedTo">Connected To: {{connectedTo}}</p>
           </nav>
-          <div id="messageOutput" when-scrolled="loadMore()">
+          <div id="messageOutput">
             <ul>
               <li class="messages" ng-repeat="msg in msgs | orderBy:'msg.date' track by $index">
                 <span class="avatar"><img src="https://vignette4.wikia.nocookie.net/monstermovies/images/5/51/Babelfish.jpg/revision/latest?cb=20120629161628" /></span>
-                {{msg.user}} : {{msg.msg}}
+                <p class="message">{{msg.user}} : {{msg.msg}}</p>
               </li>
             </ul>
           </div>
