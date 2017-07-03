@@ -41,6 +41,10 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 app.factory('auth', ['$http','$window','$state','socket','$localStorage',function($http,$window,$state,socket,$localStorage){
     var auth={};
 
+    $window.onbeforeunload = function (evt) {
+        auth.logOut();
+    }
+
     auth.saveToken=function(token){
         $window.localStorage['chranslate-token']=token;
     };
@@ -218,6 +222,7 @@ app.controller('DropdownCtrl', ['$scope','$log','setLanguage',function ($scope, 
 app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth','$window',
     '$localStorage','$state', function($scope,socket,$http,$log,setLanguage,auth,$window,$localStorage,$state)
 {
+
     if (!auth.isLoggedIn())
     {
         $state.go('register');
@@ -268,7 +273,7 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
         }
     };
 
-    $scope.checkMsg=function() {
+    $scope.checkMsg=function(){
         $scope.$watch('msg', function() {
                 //get response for data based input and output language
                 $http({
@@ -345,6 +350,14 @@ app.controller('ChatCtrl', ['$scope','socket','$http','$log','setLanguage','auth
             return { name: e , count:0 };
         });
         $localStorage.users=$scope.usernames;
+
+        if($localStorage.to_user && data.indexOf(sendTo)===-1){
+            $scope.connectedTo=$localStorage.to_user+" has disconnected.";
+        }
+
+        if(data.indexOf(sendTo)!==-1){
+            $scope.connectedTo=sendTo;
+        }
     });
 
     socket.on('load old msgs', function(data){

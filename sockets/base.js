@@ -10,7 +10,12 @@ module.exports=function (io) {
             newMsg.save(function(err){
                 if(err){throw err;}
                 console.log(data.toUser);
-                users[data.toUser].emit('get msg', {msg:data.msg, user:socket.username});
+                if(users[data.toUser]) {
+                    users[data.toUser].emit('get msg', {msg: data.msg, user: socket.username});
+                }
+                else{
+                    return;
+                }
             });
         });
 
@@ -60,8 +65,8 @@ module.exports=function (io) {
         }
 
         socket.on('remove user', function(data){
-                delete users[data];
-                updateUsernames();
+            delete users[data];
+            updateUsernames();
         });
     });
 }
